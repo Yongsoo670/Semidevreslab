@@ -623,6 +623,9 @@
       <li><a href="#research">Research</a></li>
       <li><a href="#publications">Publications</a></li>
       <li><a href="#members">Members</a></li>
+      <li><a href="#patents">Patents</a></li>
+      <li><a href="#conferences">Conferences</a></li>
+      <li><a href="#projects">Projects</a></li>
       <li><a href="#news">News</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -694,6 +697,35 @@
 
 <div class="divider"></div>
 
+<!-- ══ PATENTS ═══════════════════════════════════════ -->
+<section id="patents">
+  <p class="section-label reveal">Patents</p>
+  <h2 class="section-title reveal">특허 현황</h2>
+  <div class="pub-filters reveal" id="patent-filters"></div>
+  <div class="pub-list reveal" id="patent-list"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ CONFERENCES ═══════════════════════════════════ -->
+<section id="conferences">
+  <p class="section-label reveal">Conferences</p>
+  <h2 class="section-title reveal">학회 발표</h2>
+  <div class="pub-filters reveal" id="conf-filters"></div>
+  <div class="pub-list reveal" id="conf-list"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ PROJECTS ══════════════════════════════════════ -->
+<section id="projects">
+  <p class="section-label reveal">Research Projects</p>
+  <h2 class="section-title reveal">과제 수행현황</h2>
+  <div class="pub-list reveal" id="project-list"></div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ══ CONTACT ════════════════════════════════════════ -->
 <section id="contact">
   <p class="section-label reveal">Contact</p>
@@ -723,12 +755,26 @@
 
 <script>
 // ════════════════════════════════════════════════════
-// Site Engine — reads content/site.json and renders
+// Site Engine — 각 content/*.json 파일을 개별 로드
 // ════════════════════════════════════════════════════
+async function loadJSON(file) {
+  const res = await fetch(`content/${file}`);
+  return res.json();
+}
+
 async function init() {
-  const res  = await fetch('content/site.json');
-  const data = await res.json();
-  const { lab, research, members, publications, news } = data;
+  // 모든 파일 병렬 로드
+  const [lab, research, members, publications, news, patents, conferences, projects] =
+    await Promise.all([
+      loadJSON('lab.json'),
+      loadJSON('research.json'),
+      loadJSON('members.json'),
+      loadJSON('publications.json'),
+      loadJSON('news.json'),
+      loadJSON('patents.json'),
+      loadJSON('conferences.json'),
+      loadJSON('projects.json'),
+    ]);
 
   // ── Nav ──
   document.getElementById('nav-uni').textContent = lab.acronym;
@@ -749,7 +795,6 @@ async function init() {
     tagsEl.appendChild(s);
   });
 
-  // Stats (dynamic from data)
   const pubCount    = publications.length;
   const memberCount = members.filter(m => m.id !== 'pi').length;
   const years       = new Date().getFullYear() - parseInt(
@@ -783,15 +828,15 @@ async function init() {
   });
 
   // ── Publications ──
-  const years_list = [...new Set(publications.map(p=>p.year))].sort((a,b)=>b-a);
-  let activeYear = 'all';
-  const filtersEl = document.getElementById('pub-filters');
+  const pubYears = [...new Set(publications.map(p=>p.year))].sort((a,b)=>b-a);
+  let activePubYear = 'all';
+  const pubFiltersEl = document.getElementById('pub-filters');
 
   function renderPubs() {
     const listEl = document.getElementById('pub-list');
-    const filtered = activeYear === 'all'
+    const filtered = activePubYear === 'all'
       ? publications
-      : publications.filter(p => p.year === activeYear);
+      : publications.filter(p => p.year === activePubYear);
     listEl.innerHTML = filtered.sort((a,b)=>b.year-a.year).map(p => `
       <div class="pub-item ${p.highlight ? 'pub-highlight' : ''}">
         <div class="pub-year">${p.year}</div>
@@ -806,14 +851,13 @@ async function init() {
       </div>`).join('');
   }
 
-  // Filter buttons
-  filtersEl.innerHTML = `<button class="pub-filter active" data-year="all">All</button>` +
-    years_list.map(y => `<button class="pub-filter" data-year="${y}">${y}</button>`).join('');
-  filtersEl.addEventListener('click', e => {
+  pubFiltersEl.innerHTML = `<button class="pub-filter active" data-year="all">All</button>` +
+    pubYears.map(y => `<button class="pub-filter" data-year="${y}">${y}</button>`).join('');
+  pubFiltersEl.addEventListener('click', e => {
     if (!e.target.matches('.pub-filter')) return;
-    document.querySelectorAll('.pub-filter').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('#pub-filters .pub-filter').forEach(b=>b.classList.remove('active'));
     e.target.classList.add('active');
-    activeYear = e.target.dataset.year === 'all' ? 'all' : parseInt(e.target.dataset.year);
+    activePubYear = e.target.dataset.year === 'all' ? 'all' : parseInt(e.target.dataset.year);
     renderPubs();
   });
   renderPubs();
@@ -822,12 +866,10 @@ async function init() {
   const mg = document.getElementById('members-grid');
   const pi = members.find(m => m.id === 'pi');
   const others = members.filter(m => m.id !== 'pi');
-
   if (pi) {
     mg.innerHTML += `<div class="member-card pi-card">
       <div class="member-photo">
-        <img src="${pi.photo}" alt="${pi.name}"
-          onerror="this.parentElement.textContent='👤'" />
+        <img src="${pi.photo}" alt="${pi.name}" onerror="this.parentElement.textContent='👤'" />
       </div>
       <div>
         <div class="member-role">Principal Investigator</div>
@@ -837,12 +879,10 @@ async function init() {
       </div>
     </div>`;
   }
-
   others.forEach(m => {
     mg.innerHTML += `<div class="member-card">
       <div class="member-photo">
-        <img src="${m.photo}" alt="${m.name}"
-          onerror="this.parentElement.textContent='👤'" />
+        <img src="${m.photo}" alt="${m.name}" onerror="this.parentElement.textContent='👤'" />
       </div>
       <div class="member-name">${m.name}</div>
       <div class="member-role">${m.role}</div>
@@ -851,11 +891,102 @@ async function init() {
     </div>`;
   });
 
+  // ── Patents ──
+  const patTypeMap = { '국내': 'badge-member', '국제': 'badge-paper' };
+  const patStatusMap = { '등록': 'badge-paper', '출원': 'badge-conference', '심사중': 'badge-award' };
+  const patTypes = ['전체', '국내', '국제'];
+  let activePatType = '전체';
+  const patFiltersEl = document.getElementById('patent-filters');
+
+  function renderPatents() {
+    const listEl = document.getElementById('patent-list');
+    const filtered = activePatType === '전체'
+      ? patents
+      : patents.filter(p => p.type === activePatType);
+    listEl.innerHTML = filtered.map(p => `
+      <div class="pub-item">
+        <div class="pub-year">
+          <span class="news-badge ${patTypeMap[p.type]||'badge-paper'}">${p.type}</span>
+        </div>
+        <div>
+          <div class="pub-title">${p.title}
+            <span class="news-badge ${patStatusMap[p.status]||'badge-paper'}" style="margin-left:0.5rem">${p.status}</span>
+          </div>
+          <div class="pub-authors">${p.inventors}</div>
+          <div class="pub-journal">${p.registration_no} · ${p.registration_date} · ${p.applicant}</div>
+        </div>
+      </div>`).join('');
+  }
+
+  patFiltersEl.innerHTML = patTypes.map((t,i) =>
+    `<button class="pub-filter ${i===0?'active':''}" data-type="${t}">${t}</button>`
+  ).join('');
+  patFiltersEl.addEventListener('click', e => {
+    if (!e.target.matches('.pub-filter')) return;
+    document.querySelectorAll('#patent-filters .pub-filter').forEach(b=>b.classList.remove('active'));
+    e.target.classList.add('active');
+    activePatType = e.target.dataset.type;
+    renderPatents();
+  });
+  renderPatents();
+
+  // ── Conferences ──
+  const confTypes = ['전체', '국제', '국내'];
+  let activeConfType = '전체';
+  const confFiltersEl = document.getElementById('conf-filters');
+  const presTypeMap = { '초청강연': 'badge-award', '구두발표': 'badge-paper', '포스터': 'badge-member' };
+
+  function renderConferences() {
+    const listEl = document.getElementById('conf-list');
+    const filtered = activeConfType === '전체'
+      ? conferences
+      : conferences.filter(c => c.type === activeConfType);
+    listEl.innerHTML = [...filtered].sort((a,b)=>b.year-a.year).map(c => `
+      <div class="pub-item">
+        <div class="pub-year">${c.year}</div>
+        <div>
+          <div class="pub-title">${c.title}
+            <span class="news-badge ${presTypeMap[c.presentation_type]||'badge-paper'}" style="margin-left:0.5rem">${c.presentation_type}</span>
+          </div>
+          <div class="pub-authors">${c.authors}</div>
+          <div class="pub-journal">${c.conference} · ${c.location} · ${c.date}</div>
+        </div>
+      </div>`).join('');
+  }
+
+  confFiltersEl.innerHTML = confTypes.map((t,i) =>
+    `<button class="pub-filter ${i===0?'active':''}" data-type="${t}">${t}</button>`
+  ).join('');
+  confFiltersEl.addEventListener('click', e => {
+    if (!e.target.matches('.pub-filter')) return;
+    document.querySelectorAll('#conf-filters .pub-filter').forEach(b=>b.classList.remove('active'));
+    e.target.classList.add('active');
+    activeConfType = e.target.dataset.type;
+    renderConferences();
+  });
+  renderConferences();
+
+  // ── Projects ──
+  const projStatusColor = { '진행중': 'badge-paper', '완료': 'badge-member' };
+  const projEl = document.getElementById('project-list');
+  [...projects].sort((a,b) => b.start_date.localeCompare(a.start_date)).forEach(p => {
+    projEl.innerHTML += `
+      <div class="pub-item">
+        <div class="pub-year">
+          <span class="news-badge ${projStatusColor[p.status]||'badge-paper'}">${p.status}</span>
+        </div>
+        <div>
+          <div class="pub-title">${p.title}</div>
+          ${p.title_en ? `<div class="pub-authors" style="font-style:italic">${p.title_en}</div>` : ''}
+          <div class="pub-journal">${p.agency} · ${p.program}</div>
+          <div class="pub-journal" style="margin-top:0.2rem">📅 ${p.start_date} ~ ${p.end_date} &nbsp;|&nbsp; 💰 ${p.amount} &nbsp;|&nbsp; PI: ${p.pi}</div>
+        </div>
+      </div>`;
+  });
+
   // ── News ──
-  const badgeMap = { paper:'badge-paper', award:'badge-award',
-                     member:'badge-member', conference:'badge-conference' };
-  const labelMap = { paper:'Paper', award:'Award',
-                     member:'New Member', conference:'Conference' };
+  const badgeMap = { paper:'badge-paper', award:'badge-award', member:'badge-member', conference:'badge-conference' };
+  const labelMap = { paper:'Paper', award:'Award', member:'New Member', conference:'Conference' };
   const nl = document.getElementById('news-list');
   news.sort((a,b)=>b.date.localeCompare(a.date)).forEach(n => {
     const d = new Date(n.date);
@@ -890,27 +1021,23 @@ async function init() {
   document.getElementById('contact-email-btn').href = `mailto:${lab.pi.email}`;
 
   // ── Footer ──
-  document.getElementById('footer-logo').textContent =
-    `${lab.acronym} · ${lab.university}`;
-  document.getElementById('footer-copy').textContent =
-    `© ${new Date().getFullYear()} ${lab.name}`;
+  document.getElementById('footer-logo').textContent = `${lab.acronym} · ${lab.university}`;
+  document.getElementById('footer-copy').textContent = `© ${new Date().getFullYear()} ${lab.name}`;
 
   // ── Loader dismiss ──
   document.getElementById('loader').classList.add('done');
 
   // ── Scroll reveal ──
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // ── Active nav highlight ──
+  // ── Active nav ──
   const sections = document.querySelectorAll('section[id]');
   window.addEventListener('scroll', () => {
     let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 80) current = s.id;
-    });
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
     document.querySelectorAll('.nav-links a').forEach(a => {
       a.classList.toggle('active', a.getAttribute('href') === '#' + current);
     });
@@ -924,5 +1051,6 @@ async function init() {
 
 init().catch(console.error);
 </script>
+
 </body>
 </html>
