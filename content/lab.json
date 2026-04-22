@@ -1,0 +1,24 @@
+{
+  "name": "Semiconductor Device Research Lab",
+  "name_kr": "반도체 소자 연구실",
+  "acronym": "SRDL",
+  "university": "University of Ulsan",
+  "department": "Department of Electrical Engineering",
+  "pi": {
+    "name": "Prof. [교수님 성함]",
+    "title": "Professor",
+    "email": "pi@university.ac.kr",
+    "office": "Building X, Room XXX",
+    "phone": "+82-52-XXX-XXXX"
+  },
+  "address": "93 Daehak-ro, Nam-gu, Ulsan 44610, Republic of Korea",
+  "description": "Our research focuses on 2D semiconductor and perovskite materials for advanced optoelectronic device applications, including photodetectors, LEDs, and solar cells.",
+  "keywords": [
+    "2D Semiconductors",
+    "Perovskite",
+    "Optoelectronics",
+    "MoS₂",
+    "WSe₂",
+    "Photodetectors"
+  ]
+}
