@@ -1,0 +1,38 @@
+[
+  {
+    "id": "2d-semi",
+    "title": "2D Semiconductor Devices",
+    "icon": "⬡",
+    "description": "Investigation of transition metal dichalcogenides (TMDs) such as MoS₂, WSe₂, and MoSe₂ for high-performance optoelectronic applications. We explore van der Waals heterostructures and their unique light-matter interactions.",
+    "topics": [
+      "TMD Photodetectors",
+      "van der Waals Heterostructures",
+      "Exciton Physics",
+      "Field-Effect Transistors"
+    ]
+  },
+  {
+    "id": "perovskite",
+    "title": "Perovskite Optoelectronics",
+    "icon": "◈",
+    "description": "Development of halide perovskite-based light-emitting devices and photodetectors. Research focuses on defect engineering, stability enhancement, and integration with 2D materials.",
+    "topics": [
+      "Perovskite LEDs",
+      "Perovskite Photodetectors",
+      "Defect Engineering",
+      "Hybrid Structures"
+    ]
+  },
+  {
+    "id": "photonics",
+    "title": "Semiconductor Photonic Devices",
+    "icon": "◎",
+    "description": "Design and fabrication of photonic structures for enhanced light emission and detection. Topics include microcavity effects, Purcell enhancement, and integrated photonics.",
+    "topics": [
+      "Microcavity Devices",
+      "Purcell Enhancement",
+      "Optical Sensing",
+      "Integrated Photonics"
+    ]
+  }
+]

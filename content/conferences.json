@@ -1,0 +1,35 @@
+[
+  {
+    "id": "conf2024a",
+    "year": 2024,
+    "type": "국제",
+    "title": "Valley Polarization in WS₂/MoS₂ Vertical Heterostructures",
+    "authors": "Chinh Tam Le, J.-H. Lee, Yong Soo Kim*",
+    "conference": "제31회 한국반도체학술대회 (KCS 2024)",
+    "location": "경주화백컨벤션센터, 경주",
+    "date": "2024-01-24",
+    "presentation_type": "구두발표"
+  },
+  {
+    "id": "conf2023a",
+    "year": 2023,
+    "type": "국내",
+    "title": "Exciton-Polariton in Organic-Inorganic Perovskite Microcavity",
+    "authors": "Zeeshan Tahir, Yong Soo Kim*",
+    "conference": "2023 KPS Fall Meeting",
+    "location": "창원컨벤션센터, 창원",
+    "date": "2023-10-25",
+    "presentation_type": "포스터"
+  },
+  {
+    "id": "conf2022a",
+    "year": 2022,
+    "type": "국제",
+    "title": "2D MoS₂-based Photodetector with Enhanced Responsivity",
+    "authors": "Yong Soo Kim* (Invited)",
+    "conference": "ENGE 2022",
+    "location": "라마다 제주호텔, 제주",
+    "date": "2022-11-06",
+    "presentation_type": "초청강연"
+  }
+]
