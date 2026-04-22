@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SRDL – Semiconductor Device Research Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Design Tokens ─────────────────────────────── */
+    :root {
+      --bg:        #0a0f1a;
+      --bg2:       #0f1625;
+      --bg3:       #141d2e;
+      --surface:   #1a2438;
+      --border:    rgba(99,179,237,0.12);
+      --accent:    #63b3ed;
+      --accent2:   #90cdf4;
+      --gold:      #f6ad55;
+      --text:      #e2e8f0;
+      --text2:     #94a3b8;
+      --text3:     #64748b;
+      --serif:     'DM Serif Display', Georgia, serif;
+      --sans:      'DM Sans', system-ui, sans-serif;
+      --mono:      'JetBrains Mono', monospace;
+      --radius:    6px;
+      --nav-h:     64px;
+    }
+
+    /* ─── Reset & Base ──────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent2); }
+    img { max-width: 100%; display: block; }
+
+    /* ─── Navigation ────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h);
+      background: rgba(10,15,26,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+    }
+    .nav-inner {
+      max-width: 1200px; width: 100%; margin: 0 auto;
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+    }
+    .nav-logo span { color: var(--text3); margin: 0 0.5rem; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text2);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--accent); }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--text2); border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ─── Section Base ──────────────────────────────── */
+    section {
+      padding: 100px 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    section:first-of-type { padding-top: calc(var(--nav-h) + 100px); }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      color: var(--text2);
+      font-size: 1rem;
+      max-width: 600px;
+      margin-bottom: 3.5rem;
+    }
+    .divider {
+      width: 100%; height: 1px;
+      background: linear-gradient(90deg, var(--border) 0%, transparent 100%);
+      margin: 0;
+    }
+
+    /* ─── HERO ──────────────────────────────────────── */
+    #home {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      position: relative;
+      padding-top: var(--nav-h) !important;
+      overflow: hidden;
+      max-width: 100%;
+      padding-left: 0; padding-right: 0;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 70% 50%, rgba(99,179,237,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(246,173,85,0.04) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(99,179,237,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99,179,237,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at center, black 30%, transparent 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp 0.8s 0.2s ease forwards;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      opacity: 0; animation: fadeUp 0.8s 0.35s ease forwards;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-title-kr {
+      font-family: var(--sans);
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 300;
+      color: var(--text3);
+      margin-bottom: 2rem;
+      letter-spacing: 0.05em;
+      opacity: 0; animation: fadeUp 0.8s 0.45s ease forwards;
+    }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--text2);
+      max-width: 540px;
+      margin-bottom: 2.5rem;
+      opacity: 0; animation: fadeUp 0.8s 0.55s ease forwards;
+    }
+    .hero-tags {
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      margin-bottom: 3rem;
+      opacity: 0; animation: fadeUp 0.8s 0.65s ease forwards;
+    }
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      padding: 0.3rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--text3);
+      letter-spacing: 0.05em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .tag:hover { border-color: var(--accent); color: var(--accent); }
+    .hero-btns {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.8s 0.75s ease forwards;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      font-size: 0.88rem; font-weight: 500;
+      transition: all 0.2s; cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      border: 1px solid var(--accent);
+    }
+    .btn-primary:hover {
+      background: var(--accent2);
+      border-color: var(--accent2);
+      color: var(--bg);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--text2);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ─── Stats strip ───────────────────────────────── */
+    .hero-stats {
+      display: flex; gap: 3rem; margin-top: 4rem;
+      padding-top: 2rem; border-top: 1px solid var(--border);
+      opacity: 0; animation: fadeUp 0.8s 0.9s ease forwards;
+    }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      color: var(--accent);
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text3);
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── RESEARCH ──────────────────────────────────── */
+    #research { background: var(--bg); }
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .research-card {
+      background: var(--bg2);
+      padding: 2.5rem;
+      position: relative;
+      transition: background 0.3s;
+      cursor: default;
+    }
+    .research-card:hover { background: var(--bg3); }
+    .research-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .research-card:hover::before { opacity: 1; }
+    .research-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1.25rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .research-card h3 {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+    .research-card p {
+      font-size: 0.9rem;
+      color: var(--text2);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .research-topics { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .topic-tag {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      padding: 0.2rem 0.55rem;
+      background: rgba(99,179,237,0.08);
+      border: 1px solid rgba(99,179,237,0.2);
+      border-radius: 4px;
+      color: var(--accent);
+    }
+
+    /* ─── PUBLICATIONS ──────────────────────────────── */
+    #publications { background: var(--bg2); max-width: 100%; padding-left: 0; padding-right: 0; }
+    #publications > * { max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 2rem; padding-right: 2rem; }
+    .pub-filters {
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .pub-filter {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      padding: 0.3rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      background: none;
+      color: var(--text3);
+      cursor: pointer; letter-spacing: 0.05em;
+      transition: all 0.2s;
+    }
+    .pub-filter.active,
+    .pub-filter:hover { border-color: var(--accent); color: var(--accent); }
+    .pub-list { display: flex; flex-direction: column; gap: 0; }
+    .pub-item {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 0 1.5rem;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .pub-item:first-child { border-top: 1px solid var(--border); }
+    .pub-year {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--text3);
+      padding-top: 0.2rem;
+    }
+    .pub-highlight .pub-year { color: var(--gold); }
+    .pub-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+      line-height: 1.5;
+    }
+    .pub-highlight .pub-title { color: var(--accent2); }
+    .pub-authors {
+      font-size: 0.82rem;
+      color: var(--text2);
+      margin-bottom: 0.3rem;
+    }
+    .pub-journal {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text3);
+    }
+    .pub-doi {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      margin-top: 0.4rem;
+      display: inline-block;
+    }
+    .pub-star {
+      display: inline-block;
+      font-size: 0.65rem;
+      background: rgba(246,173,85,0.15);
+      border: 1px solid rgba(246,173,85,0.3);
+      color: var(--gold);
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+      font-family: var(--mono);
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── MEMBERS ───────────────────────────────────── */
+    #members { background: var(--bg); }
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .member-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .member-card:hover {
+      border-color: rgba(99,179,237,0.3);
+      transform: translateY(-3px);
+    }
+    .member-photo {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1rem;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; color: var(--text3);
+      overflow: hidden;
+    }
+    .member-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .member-name {
+      font-weight: 600; font-size: 0.95rem;
+      color: var(--text); margin-bottom: 0.25rem;
+    }
+    .member-role {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.75rem;
+    }
+    .member-bio {
+      font-size: 0.82rem;
+      color: var(--text3);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    .member-email {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text3);
+    }
+    .member-card.pi-card {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.5rem;
+      text-align: left;
+      padding: 2rem;
+    }
+    .pi-card .member-photo { width: 100px; height: 100px; margin: 0; }
+    .pi-card .member-name { font-size: 1.15rem; }
+    .pi-card .member-bio { font-size: 0.88rem; color: var(--text2); }
+
+    /* ─── NEWS ──────────────────────────────────────── */
+    #news { background: var(--bg2); max-width: 100%; padding-left: 0; padding-right: 0; }
+    #news > * { max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 2rem; padding-right: 2rem; }
+    .news-list { display: flex; flex-direction: column; gap: 0; }
+    .news-item {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 0 2rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .news-item:first-child { border-top: 1px solid var(--border); }
+    .news-date {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text3);
+      padding-top: 0.15rem;
+    }
+    .news-badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .badge-paper { background: rgba(99,179,237,0.12); color: var(--accent); }
+    .badge-award { background: rgba(246,173,85,0.12); color: var(--gold); }
+    .badge-member { background: rgba(104,211,145,0.12); color: #68d391; }
+    .badge-conference { background: rgba(183,148,244,0.12); color: #b794f4; }
+    .news-title {
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+    .news-body { font-size: 0.85rem; color: var(--text2); line-height: 1.6; }
+
+    /* ─── CONTACT ───────────────────────────────────── */
+    #contact { background: var(--bg); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+    .contact-block h3 {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    .contact-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      margin-bottom: 1.25rem;
+    }
+    .contact-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;
+    }
+    .contact-info-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text3);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+    .contact-info-val {
+      font-size: 0.9rem;
+      color: var(--text2);
+    }
+    .join-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+    }
+    .join-box h3 {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+    .join-box p {
+      font-size: 0.88rem;
+      color: var(--text2);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ─── Footer ────────────────────────────────────── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; flex-wrap: wrap;
+    }
+    .footer-logo {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--text3);
+    }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--text3);
+    }
+
+    /* ─── Animations ────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── Loading ────────────────────────────────────── */
+    #loader {
+      position: fixed; inset: 0; z-index: 999;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.5s;
+    }
+    #loader.done { opacity: 0; pointer-events: none; }
+    .loader-text {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+    }
+
+    /* ─── Responsive ────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: fixed; top: var(--nav-h); left: 0; right: 0;
+        background: var(--bg2);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 2rem 1.5rem;
+        gap: 1.25rem;
+      }
+      .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .news-item { grid-template-columns: 1fr; gap: 0.25rem; }
+      .pub-item { grid-template-columns: 1fr; }
+      .pub-year { font-size: 0.75rem; margin-bottom: 0.25rem; }
+      .member-card.pi-card { grid-template-columns: 1fr; text-align: center; }
+      .pi-card .member-photo { margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Loader -->
+<div id="loader"><span class="loader-text">SRDL ···</span></div>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">SRDL<span>/</span><span id="nav-uni"></span></div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#members">Members</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══════════════════════════════════════════ -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow" id="hero-eyebrow"></p>
+    <h1 class="hero-title" id="hero-title"></h1>
+    <p class="hero-title-kr" id="hero-title-kr"></p>
+    <p class="hero-desc" id="hero-desc"></p>
+    <div class="hero-tags" id="hero-tags"></div>
+    <div class="hero-btns">
+      <a href="#research" class="btn btn-primary">Explore Research →</a>
+      <a href="#publications" class="btn btn-outline">Publications</a>
+    </div>
+    <div class="hero-stats" id="hero-stats"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ RESEARCH ══════════════════════════════════════ -->
+<section id="research">
+  <p class="section-label reveal">Research Areas</p>
+  <h2 class="section-title reveal">What We Investigate</h2>
+  <p class="section-sub reveal" id="research-sub"></p>
+  <div class="research-grid reveal" id="research-grid"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ PUBLICATIONS ══════════════════════════════════ -->
+<section id="publications">
+  <div>
+    <p class="section-label reveal">Publications</p>
+    <h2 class="section-title reveal">Selected Works</h2>
+    <div class="pub-filters reveal" id="pub-filters"></div>
+    <div class="pub-list reveal" id="pub-list"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ MEMBERS ════════════════════════════════════════ -->
+<section id="members">
+  <p class="section-label reveal">Lab Members</p>
+  <h2 class="section-title reveal">Our Team</h2>
+  <div class="members-grid reveal" id="members-grid"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ NEWS ══════════════════════════════════════════ -->
+<section id="news">
+  <div>
+    <p class="section-label reveal">Latest</p>
+    <h2 class="section-title reveal">News & Updates</h2>
+    <div class="news-list reveal" id="news-list"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ CONTACT ════════════════════════════════════════ -->
+<section id="contact">
+  <p class="section-label reveal">Contact</p>
+  <h2 class="section-title reveal">Get in Touch</h2>
+  <div class="contact-grid">
+    <div class="contact-block reveal">
+      <h3>Location & Contact</h3>
+      <div id="contact-items"></div>
+    </div>
+    <div class="reveal">
+      <div class="join-box">
+        <h3>Join Our Lab</h3>
+        <p>We are always looking for motivated students interested in 2D semiconductor and perovskite optoelectronics. Prospective graduate students (M.S. and Ph.D.) and undergraduate researchers are welcome to reach out.</p>
+        <a id="contact-email-btn" href="#" class="btn btn-primary">Send an Email →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo" id="footer-logo"></span>
+    <span class="footer-copy" id="footer-copy"></span>
+  </div>
+</footer>
+
+<script>
+// ════════════════════════════════════════════════════
+// Site Engine — reads content/site.json and renders
+// ════════════════════════════════════════════════════
+async function init() {
+  const res  = await fetch('content/site.json');
+  const data = await res.json();
+  const { lab, research, members, publications, news } = data;
+
+  // ── Nav ──
+  document.getElementById('nav-uni').textContent = lab.acronym;
+  document.title = `${lab.acronym} – ${lab.name}`;
+
+  // ── Hero ──
+  document.getElementById('hero-eyebrow').textContent =
+    `${lab.department} · ${lab.university}`;
+  document.getElementById('hero-title').innerHTML =
+    `${lab.name.replace('Semiconductor', '<em>Semiconductor</em>')}`;
+  document.getElementById('hero-title-kr').textContent = lab.name_kr;
+  document.getElementById('hero-desc').textContent = lab.description;
+
+  const tagsEl = document.getElementById('hero-tags');
+  lab.keywords.forEach(k => {
+    const s = document.createElement('span');
+    s.className = 'tag'; s.textContent = k;
+    tagsEl.appendChild(s);
+  });
+
+  // Stats (dynamic from data)
+  const pubCount    = publications.length;
+  const memberCount = members.filter(m => m.id !== 'pi').length;
+  const years       = new Date().getFullYear() - parseInt(
+    members.find(m=>m.id==='pi')?.joined || '2015');
+  const statsEl = document.getElementById('hero-stats');
+  [
+    [pubCount + '+', 'Publications'],
+    [memberCount,    'Lab Members'],
+    [years + '+',    'Years Active'],
+    [research.length,'Research Areas']
+  ].forEach(([n, l]) => {
+    statsEl.innerHTML += `<div>
+      <div class="stat-num">${n}</div>
+      <div class="stat-label">${l}</div>
+    </div>`;
+  });
+
+  // ── Research ──
+  document.getElementById('research-sub').textContent =
+    'We explore novel semiconductor materials and device architectures at the intersection of 2D materials and perovskites.';
+  const rg = document.getElementById('research-grid');
+  research.forEach(r => {
+    rg.innerHTML += `<div class="research-card">
+      <div class="research-icon">${r.icon}</div>
+      <h3>${r.title}</h3>
+      <p>${r.description}</p>
+      <div class="research-topics">
+        ${r.topics.map(t=>`<span class="topic-tag">${t}</span>`).join('')}
+      </div>
+    </div>`;
+  });
+
+  // ── Publications ──
+  const years_list = [...new Set(publications.map(p=>p.year))].sort((a,b)=>b-a);
+  let activeYear = 'all';
+  const filtersEl = document.getElementById('pub-filters');
+
+  function renderPubs() {
+    const listEl = document.getElementById('pub-list');
+    const filtered = activeYear === 'all'
+      ? publications
+      : publications.filter(p => p.year === activeYear);
+    listEl.innerHTML = filtered.sort((a,b)=>b.year-a.year).map(p => `
+      <div class="pub-item ${p.highlight ? 'pub-highlight' : ''}">
+        <div class="pub-year">${p.year}</div>
+        <div>
+          <div class="pub-title">${p.title}
+            ${p.highlight ? '<span class="pub-star">★ Featured</span>' : ''}
+          </div>
+          <div class="pub-authors">${p.authors}</div>
+          <div class="pub-journal">${p.journal}${p.volume ? `, ${p.volume}` : ''}${p.pages ? `, ${p.pages}` : ''}</div>
+          ${p.doi ? `<a class="pub-doi" href="https://doi.org/${p.doi}" target="_blank">DOI: ${p.doi}</a>` : ''}
+        </div>
+      </div>`).join('');
+  }
+
+  // Filter buttons
+  filtersEl.innerHTML = `<button class="pub-filter active" data-year="all">All</button>` +
+    years_list.map(y => `<button class="pub-filter" data-year="${y}">${y}</button>`).join('');
+  filtersEl.addEventListener('click', e => {
+    if (!e.target.matches('.pub-filter')) return;
+    document.querySelectorAll('.pub-filter').forEach(b=>b.classList.remove('active'));
+    e.target.classList.add('active');
+    activeYear = e.target.dataset.year === 'all' ? 'all' : parseInt(e.target.dataset.year);
+    renderPubs();
+  });
+  renderPubs();
+
+  // ── Members ──
+  const mg = document.getElementById('members-grid');
+  const pi = members.find(m => m.id === 'pi');
+  const others = members.filter(m => m.id !== 'pi');
+
+  if (pi) {
+    mg.innerHTML += `<div class="member-card pi-card">
+      <div class="member-photo">
+        <img src="${pi.photo}" alt="${pi.name}"
+          onerror="this.parentElement.textContent='👤'" />
+      </div>
+      <div>
+        <div class="member-role">Principal Investigator</div>
+        <div class="member-name">${pi.name}</div>
+        <div class="member-bio" style="margin-top:0.5rem">${pi.bio}</div>
+        <div class="member-email" style="margin-top:0.75rem">✉ ${pi.email}</div>
+      </div>
+    </div>`;
+  }
+
+  others.forEach(m => {
+    mg.innerHTML += `<div class="member-card">
+      <div class="member-photo">
+        <img src="${m.photo}" alt="${m.name}"
+          onerror="this.parentElement.textContent='👤'" />
+      </div>
+      <div class="member-name">${m.name}</div>
+      <div class="member-role">${m.role}</div>
+      <div class="member-bio">${m.bio}</div>
+      <div class="member-email">✉ ${m.email}</div>
+    </div>`;
+  });
+
+  // ── News ──
+  const badgeMap = { paper:'badge-paper', award:'badge-award',
+                     member:'badge-member', conference:'badge-conference' };
+  const labelMap = { paper:'Paper', award:'Award',
+                     member:'New Member', conference:'Conference' };
+  const nl = document.getElementById('news-list');
+  news.sort((a,b)=>b.date.localeCompare(a.date)).forEach(n => {
+    const d = new Date(n.date);
+    const dateStr = d.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});
+    nl.innerHTML += `<div class="news-item">
+      <div class="news-date">${dateStr}</div>
+      <div>
+        <span class="news-badge ${badgeMap[n.type]||'badge-paper'}">${labelMap[n.type]||n.type}</span>
+        <div class="news-title">${n.title}</div>
+        <div class="news-body">${n.content}</div>
+      </div>
+    </div>`;
+  });
+
+  // ── Contact ──
+  const ci = document.getElementById('contact-items');
+  const icons = { address:'📍', phone:'📞', email:'✉️', office:'🏢' };
+  [
+    { key:'address', label:'Address',   val: lab.address },
+    { key:'office',  label:'Office',    val: lab.pi.office },
+    { key:'phone',   label:'Phone',     val: lab.pi.phone },
+    { key:'email',   label:'Email',     val: `<a href="mailto:${lab.pi.email}">${lab.pi.email}</a>` },
+  ].forEach(({key,label,val}) => {
+    ci.innerHTML += `<div class="contact-item">
+      <div class="contact-icon">${icons[key]}</div>
+      <div>
+        <div class="contact-info-label">${label}</div>
+        <div class="contact-info-val">${val}</div>
+      </div>
+    </div>`;
+  });
+  document.getElementById('contact-email-btn').href = `mailto:${lab.pi.email}`;
+
+  // ── Footer ──
+  document.getElementById('footer-logo').textContent =
+    `${lab.acronym} · ${lab.university}`;
+  document.getElementById('footer-copy').textContent =
+    `© ${new Date().getFullYear()} ${lab.name}`;
+
+  // ── Loader dismiss ──
+  document.getElementById('loader').classList.add('done');
+
+  // ── Scroll reveal ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Active nav highlight ──
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) current = s.id;
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+
+  // ── Mobile nav ──
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('nav-links').classList.toggle('open');
+  });
+}
+
+init().catch(console.error);
+</script>
+</body>
+</html>
