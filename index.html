@@ -5,605 +5,466 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SRDL – Semiconductor Device Research Lab</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    /* ─── Design Tokens ─────────────────────────────── */
+    /* ─── Design Tokens (White + Navy) ─────────────── */
     :root {
-      --bg:        #0a0f1a;
-      --bg2:       #0f1625;
-      --bg3:       #141d2e;
-      --surface:   #1a2438;
-      --border:    rgba(99,179,237,0.12);
-      --accent:    #63b3ed;
-      --accent2:   #90cdf4;
-      --gold:      #f6ad55;
-      --text:      #e2e8f0;
-      --text2:     #94a3b8;
-      --text3:     #64748b;
-      --serif:     'DM Serif Display', Georgia, serif;
-      --sans:      'DM Sans', system-ui, sans-serif;
+      --navy:      #0f2854;
+      --navy2:     #1a3a6b;
+      --navy3:     #254d8f;
+      --accent:    #1d6fa4;
+      --accent2:   #2589c7;
+      --gold:      #c8922a;
+      --bg:        #ffffff;
+      --bg2:       #f4f7fb;
+      --bg3:       #e8eef7;
+      --surface:   #ffffff;
+      --border:    #dce5f0;
+      --text:      #0f2040;
+      --text2:     #3d5070;
+      --text3:     #7a90b0;
+      --serif:     'Playfair Display', Georgia, serif;
+      --sans:      'Inter', system-ui, sans-serif;
       --mono:      'JetBrains Mono', monospace;
-      --radius:    6px;
-      --nav-h:     64px;
+      --radius:    8px;
+      --nav-h:     68px;
+      --shadow:    0 2px 20px rgba(15,40,84,0.08);
+      --shadow2:   0 8px 40px rgba(15,40,84,0.12);
     }
 
     /* ─── Reset & Base ──────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
-    body {
-      font-family: var(--sans);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
     a { color: var(--accent); text-decoration: none; }
-    a:hover { color: var(--accent2); }
+    a:hover { color: var(--navy); }
     img { max-width: 100%; display: block; }
 
     /* ─── Navigation ────────────────────────────────── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       height: var(--nav-h);
-      background: rgba(10,15,26,0.92);
+      background: rgba(255,255,255,0.96);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 12px rgba(15,40,84,0.06);
       display: flex; align-items: center;
     }
     .nav-inner {
-      max-width: 1200px; width: 100%; margin: 0 auto;
+      max-width: 1280px; width: 100%; margin: 0 auto;
       padding: 0 2rem;
       display: flex; align-items: center; justify-content: space-between;
     }
     .nav-logo {
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .nav-logo-badge {
+      background: var(--navy);
+      color: #fff;
       font-family: var(--mono);
-      font-size: 0.9rem;
+      font-size: 0.78rem;
       font-weight: 500;
-      color: var(--accent);
+      padding: 0.3rem 0.65rem;
+      border-radius: 4px;
       letter-spacing: 0.08em;
     }
-    .nav-logo span { color: var(--text3); margin: 0 0.5rem; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      font-size: 0.85rem;
+    .nav-logo-text {
+      font-size: 0.82rem;
       font-weight: 500;
       color: var(--text2);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      transition: color 0.2s;
+      letter-spacing: 0.01em;
     }
-    .nav-links a:hover,
-    .nav-links a.active { color: var(--accent); }
-    .hamburger {
-      display: none; flex-direction: column; gap: 5px; cursor: pointer;
-      background: none; border: none; padding: 4px;
+    .nav-links { display: flex; gap: 0.25rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.8rem; font-weight: 500;
+      color: var(--text2);
+      letter-spacing: 0.03em;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      transition: all 0.2s;
     }
-    .hamburger span {
-      display: block; width: 24px; height: 2px;
-      background: var(--text2); border-radius: 2px;
-      transition: all 0.3s;
-    }
+    .nav-links a:hover { background: var(--bg2); color: var(--navy); }
+    .nav-links a.active { background: var(--navy); color: #fff; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text2); border-radius: 2px; transition: all 0.3s; }
 
     /* ─── Section Base ──────────────────────────────── */
-    section {
-      padding: 100px 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    section:first-of-type { padding-top: calc(var(--nav-h) + 100px); }
-
+    section { padding: 90px 2rem; max-width: 1280px; margin: 0 auto; }
     .section-label {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.75rem;
+      font-family: var(--mono); font-size: 0.7rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.6rem;
+      display: flex; align-items: center; gap: 0.6rem;
     }
+    .section-label::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--accent); opacity: 0.4; }
     .section-title {
-      font-family: var(--serif);
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      color: var(--text);
-      line-height: 1.2;
-      margin-bottom: 1rem;
+      font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      color: var(--navy); line-height: 1.2; margin-bottom: 0.9rem;
     }
-    .section-sub {
-      color: var(--text2);
-      font-size: 1rem;
-      max-width: 600px;
-      margin-bottom: 3.5rem;
-    }
-    .divider {
-      width: 100%; height: 1px;
-      background: linear-gradient(90deg, var(--border) 0%, transparent 100%);
-      margin: 0;
-    }
+    .section-sub { color: var(--text2); font-size: 1rem; max-width: 580px; margin-bottom: 3rem; }
+    .divider { width: 100%; height: 1px; background: var(--border); margin: 0; }
 
     /* ─── HERO ──────────────────────────────────────── */
     #home {
-      min-height: 100vh;
-      display: flex; align-items: center;
-      position: relative;
-      padding-top: var(--nav-h) !important;
-      overflow: hidden;
-      max-width: 100%;
-      padding-left: 0; padding-right: 0;
+      min-height: 100vh; display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      max-width: 100%; padding: 0;
+      background: linear-gradient(135deg, #f0f5ff 0%, #e8f0fa 40%, #f5f8ff 100%);
     }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 70% 50%, rgba(99,179,237,0.07) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(246,173,85,0.04) 0%, transparent 60%);
+    .hero-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+      width: 100%; padding-top: var(--nav-h);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center; min-height: 100vh;
     }
-    .hero-grid {
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(99,179,237,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(99,179,237,0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse 80% 80% at center, black 30%, transparent 100%);
-    }
-    .hero-content {
-      position: relative; z-index: 1;
-      max-width: 1200px; margin: 0 auto;
-      padding: 0 2rem;
-      width: 100%;
-    }
+    .hero-left { position: relative; z-index: 1; }
     .hero-eyebrow {
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      opacity: 0; animation: fadeUp 0.8s 0.2s ease forwards;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--mono); font-size: 0.72rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.5rem;
+      background: rgba(29,111,164,0.08);
+      border: 1px solid rgba(29,111,164,0.2);
+      padding: 0.35rem 0.85rem; border-radius: 100px;
+      opacity: 0; animation: fadeUp 0.7s 0.1s ease forwards;
     }
     .hero-title {
       font-family: var(--serif);
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      line-height: 1.1;
-      color: var(--text);
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      line-height: 1.15; color: var(--navy);
       margin-bottom: 0.5rem;
-      opacity: 0; animation: fadeUp 0.8s 0.35s ease forwards;
+      opacity: 0; animation: fadeUp 0.7s 0.25s ease forwards;
     }
-    .hero-title em {
-      font-style: italic;
-      color: var(--accent);
-    }
+    .hero-title em { font-style: italic; color: var(--accent); }
     .hero-title-kr {
-      font-family: var(--sans);
-      font-size: clamp(1rem, 2vw, 1.3rem);
-      font-weight: 300;
-      color: var(--text3);
-      margin-bottom: 2rem;
-      letter-spacing: 0.05em;
-      opacity: 0; animation: fadeUp 0.8s 0.45s ease forwards;
+      font-size: 1rem; font-weight: 300; color: var(--text3);
+      margin-bottom: 1.75rem; letter-spacing: 0.05em;
+      opacity: 0; animation: fadeUp 0.7s 0.35s ease forwards;
     }
     .hero-desc {
-      font-size: 1.05rem;
-      color: var(--text2);
-      max-width: 540px;
-      margin-bottom: 2.5rem;
-      opacity: 0; animation: fadeUp 0.8s 0.55s ease forwards;
+      font-size: 1rem; color: var(--text2); max-width: 480px;
+      margin-bottom: 2rem; line-height: 1.8;
+      opacity: 0; animation: fadeUp 0.7s 0.45s ease forwards;
     }
     .hero-tags {
-      display: flex; flex-wrap: wrap; gap: 0.6rem;
-      margin-bottom: 3rem;
-      opacity: 0; animation: fadeUp 0.8s 0.65s ease forwards;
+      display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem;
+      opacity: 0; animation: fadeUp 0.7s 0.55s ease forwards;
     }
     .tag {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      padding: 0.3rem 0.75rem;
+      font-size: 0.75rem; font-weight: 500;
+      padding: 0.3rem 0.8rem;
       border: 1px solid var(--border);
-      border-radius: 100px;
-      color: var(--text3);
-      letter-spacing: 0.05em;
-      transition: border-color 0.2s, color 0.2s;
+      border-radius: 100px; color: var(--text2);
+      background: white; transition: all 0.2s;
     }
-    .tag:hover { border-color: var(--accent); color: var(--accent); }
+    .tag:hover { border-color: var(--accent); color: var(--accent); background: rgba(29,111,164,0.05); }
     .hero-btns {
       display: flex; gap: 1rem; flex-wrap: wrap;
-      opacity: 0; animation: fadeUp 0.8s 0.75s ease forwards;
+      opacity: 0; animation: fadeUp 0.7s 0.65s ease forwards;
     }
     .btn {
       display: inline-flex; align-items: center; gap: 0.4rem;
-      padding: 0.75rem 1.5rem;
-      border-radius: var(--radius);
-      font-size: 0.88rem; font-weight: 500;
-      transition: all 0.2s; cursor: pointer;
+      padding: 0.75rem 1.6rem; border-radius: var(--radius);
+      font-size: 0.88rem; font-weight: 600;
+      transition: all 0.2s; cursor: pointer; border: none;
     }
-    .btn-primary {
-      background: var(--accent);
-      color: var(--bg);
-      border: 1px solid var(--accent);
-    }
-    .btn-primary:hover {
-      background: var(--accent2);
-      border-color: var(--accent2);
-      color: var(--bg);
-    }
-    .btn-outline {
-      background: transparent;
-      color: var(--text2);
-      border: 1px solid var(--border);
-    }
-    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-
-    /* ─── Stats strip ───────────────────────────────── */
+    .btn-primary { background: var(--navy); color: #fff; }
+    .btn-primary:hover { background: var(--navy2); color: #fff; transform: translateY(-1px); box-shadow: var(--shadow2); }
+    .btn-outline { background: white; color: var(--navy); border: 1.5px solid var(--border); }
+    .btn-outline:hover { border-color: var(--navy); background: var(--bg2); color: var(--navy); }
     .hero-stats {
-      display: flex; gap: 3rem; margin-top: 4rem;
+      display: flex; gap: 2.5rem; margin-top: 3rem;
       padding-top: 2rem; border-top: 1px solid var(--border);
-      opacity: 0; animation: fadeUp 0.8s 0.9s ease forwards;
+      opacity: 0; animation: fadeUp 0.7s 0.8s ease forwards;
     }
-    .stat-num {
-      font-family: var(--serif);
-      font-size: 2rem;
-      color: var(--accent);
+    .stat-num { font-family: var(--serif); font-size: 2rem; color: var(--navy); line-height: 1; }
+    .stat-label { font-size: 0.75rem; color: var(--text3); margin-top: 0.2rem; }
+
+    /* ─── HERO RIGHT: Cover Slideshow ───────────────── */
+    .hero-right {
+      position: relative; z-index: 1;
+      opacity: 0; animation: fadeIn 1s 0.5s ease forwards;
     }
-    .stat-label {
-      font-size: 0.78rem;
-      color: var(--text3);
-      letter-spacing: 0.05em;
+    .slideshow {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(15,40,84,0.18);
+      background: var(--bg2);
+      aspect-ratio: 4/3;
     }
+    .slide {
+      position: absolute; inset: 0;
+      opacity: 0; transition: opacity 0.8s ease;
+    }
+    .slide.active { opacity: 1; }
+    .slide img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    /* Placeholder slide when no image */
+    .slide-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy3) 100%);
+      color: white; text-align: center; padding: 2rem;
+    }
+    .slide-placeholder .slide-journal {
+      font-family: var(--mono); font-size: 0.7rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(255,255,255,0.6); margin-bottom: 1rem;
+    }
+    .slide-placeholder .slide-title {
+      font-family: var(--serif); font-size: 1.2rem;
+      line-height: 1.4; color: white; margin-bottom: 0.75rem;
+    }
+    .slide-placeholder .slide-authors {
+      font-size: 0.78rem; color: rgba(255,255,255,0.65); line-height: 1.5;
+    }
+    .slide-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(10,25,55,0.85));
+      color: white; padding: 2rem 1.5rem 1.25rem;
+      transform: translateY(0);
+    }
+    .slide-caption-journal {
+      font-family: var(--mono); font-size: 0.65rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.65); margin-bottom: 0.3rem;
+    }
+    .slide-caption-title { font-size: 0.85rem; font-weight: 500; color: white; line-height: 1.4; }
+    .slide-dots {
+      position: absolute; bottom: -2rem; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 0.5rem;
+    }
+    .slide-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--border); cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .slide-dot.active { background: var(--navy); transform: scale(1.3); }
+    .slide-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      display: flex; justify-content: space-between;
+      width: 100%; padding: 0 0.75rem; pointer-events: none;
+    }
+    .slide-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      border: none; cursor: pointer; pointer-events: all;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: var(--navy);
+      box-shadow: var(--shadow); transition: all 0.2s;
+    }
+    .slide-btn:hover { background: white; transform: scale(1.08); }
+    .slideshow-wrapper { position: relative; padding-bottom: 2.5rem; }
 
     /* ─── RESEARCH ──────────────────────────────────── */
     #research { background: var(--bg); }
     .research-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5px;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
     }
     .research-card {
       background: var(--bg2);
-      padding: 2.5rem;
-      position: relative;
-      transition: background 0.3s;
-      cursor: default;
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 2rem;
+      transition: all 0.3s; cursor: default;
+      position: relative; overflow: hidden;
     }
-    .research-card:hover { background: var(--bg3); }
     .research-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), transparent);
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--navy), var(--accent));
       opacity: 0; transition: opacity 0.3s;
     }
+    .research-card:hover { transform: translateY(-4px); box-shadow: var(--shadow2); border-color: transparent; }
     .research-card:hover::before { opacity: 1; }
-    .research-icon {
-      font-size: 1.8rem;
-      margin-bottom: 1.25rem;
-      color: var(--accent);
-      line-height: 1;
-    }
-    .research-card h3 {
-      font-family: var(--serif);
-      font-size: 1.3rem;
-      color: var(--text);
-      margin-bottom: 0.75rem;
-    }
-    .research-card p {
-      font-size: 0.9rem;
-      color: var(--text2);
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-    }
+    .research-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .research-card h3 { font-family: var(--serif); font-size: 1.25rem; color: var(--navy); margin-bottom: 0.75rem; }
+    .research-card p { font-size: 0.9rem; color: var(--text2); line-height: 1.7; margin-bottom: 1.25rem; }
     .research-topics { display: flex; flex-wrap: wrap; gap: 0.4rem; }
     .topic-tag {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      padding: 0.2rem 0.55rem;
-      background: rgba(99,179,237,0.08);
-      border: 1px solid rgba(99,179,237,0.2);
-      border-radius: 4px;
-      color: var(--accent);
+      font-size: 0.72rem; font-weight: 500;
+      padding: 0.25rem 0.6rem;
+      background: rgba(15,40,84,0.06);
+      border: 1px solid rgba(15,40,84,0.1);
+      border-radius: 4px; color: var(--navy2);
     }
 
     /* ─── PUBLICATIONS ──────────────────────────────── */
     #publications { background: var(--bg2); max-width: 100%; padding-left: 0; padding-right: 0; }
-    #publications > * { max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 2rem; padding-right: 2rem; }
-    .pub-filters {
-      display: flex; gap: 0.5rem; flex-wrap: wrap;
-      margin-bottom: 2.5rem;
-    }
+    #publications > * { max-width: 1280px; margin-left: auto; margin-right: auto; padding-left: 2rem; padding-right: 2rem; }
+    .pub-filters { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 2rem; }
     .pub-filter {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      padding: 0.3rem 0.85rem;
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      background: none;
-      color: var(--text3);
-      cursor: pointer; letter-spacing: 0.05em;
-      transition: all 0.2s;
+      font-size: 0.78rem; font-weight: 500;
+      padding: 0.35rem 0.9rem;
+      border: 1.5px solid var(--border);
+      border-radius: 100px; background: white;
+      color: var(--text2); cursor: pointer; transition: all 0.2s;
     }
-    .pub-filter.active,
-    .pub-filter:hover { border-color: var(--accent); color: var(--accent); }
-    .pub-list { display: flex; flex-direction: column; gap: 0; }
+    .pub-filter.active, .pub-filter:hover { border-color: var(--navy); color: var(--navy); background: rgba(15,40,84,0.05); }
+    .pub-filter.active { background: var(--navy); color: white; }
+    .pub-list { display: flex; flex-direction: column; }
     .pub-item {
-      display: grid;
-      grid-template-columns: 64px 1fr;
-      gap: 0 1.5rem;
-      padding: 1.75rem 0;
+      display: grid; grid-template-columns: 72px 1fr;
+      gap: 0 1.5rem; padding: 1.5rem 0;
       border-bottom: 1px solid var(--border);
       transition: background 0.2s;
     }
     .pub-item:first-child { border-top: 1px solid var(--border); }
-    .pub-year {
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      color: var(--text3);
-      padding-top: 0.2rem;
-    }
-    .pub-highlight .pub-year { color: var(--gold); }
-    .pub-title {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 0.3rem;
-      line-height: 1.5;
-    }
-    .pub-highlight .pub-title { color: var(--accent2); }
-    .pub-authors {
-      font-size: 0.82rem;
-      color: var(--text2);
-      margin-bottom: 0.3rem;
-    }
-    .pub-journal {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--text3);
-    }
-    .pub-doi {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--accent);
-      margin-top: 0.4rem;
-      display: inline-block;
-    }
+    .pub-year { font-family: var(--mono); font-size: 0.78rem; color: var(--text3); padding-top: 0.2rem; }
+    .pub-highlight .pub-year { color: var(--gold); font-weight: 500; }
+    .pub-title { font-size: 0.93rem; font-weight: 600; color: var(--navy); margin-bottom: 0.25rem; line-height: 1.5; }
+    .pub-highlight .pub-title { color: var(--navy2); }
+    .pub-authors { font-size: 0.82rem; color: var(--text2); margin-bottom: 0.25rem; }
+    .pub-journal { font-family: var(--mono); font-size: 0.74rem; color: var(--text3); }
+    .pub-doi { font-family: var(--mono); font-size: 0.71rem; color: var(--accent); margin-top: 0.35rem; display: inline-block; }
     .pub-star {
-      display: inline-block;
-      font-size: 0.65rem;
-      background: rgba(246,173,85,0.15);
-      border: 1px solid rgba(246,173,85,0.3);
-      color: var(--gold);
-      padding: 0.1rem 0.4rem;
-      border-radius: 3px;
-      margin-left: 0.5rem;
-      vertical-align: middle;
-      font-family: var(--mono);
-      letter-spacing: 0.05em;
+      display: inline-block; font-size: 0.63rem;
+      background: rgba(200,146,42,0.12); border: 1px solid rgba(200,146,42,0.3);
+      color: var(--gold); padding: 0.1rem 0.4rem; border-radius: 3px;
+      margin-left: 0.5rem; vertical-align: middle; font-family: var(--mono);
     }
 
     /* ─── MEMBERS ───────────────────────────────────── */
     #members { background: var(--bg); }
-    .members-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1.5rem;
-    }
+    .members-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 1.25rem; }
     .member-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 2rem 1.5rem;
-      text-align: center;
-      transition: border-color 0.2s, transform 0.2s;
+      background: white; border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.75rem 1.5rem;
+      text-align: center; transition: all 0.25s;
+      box-shadow: var(--shadow);
     }
-    .member-card:hover {
-      border-color: rgba(99,179,237,0.3);
-      transform: translateY(-3px);
-    }
+    .member-card:hover { transform: translateY(-4px); box-shadow: var(--shadow2); border-color: var(--bg3); }
     .member-photo {
-      width: 80px; height: 80px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: 0 auto 1rem;
-      background: var(--surface);
-      border: 2px solid var(--border);
+      width: 80px; height: 80px; border-radius: 50%;
+      object-fit: cover; margin: 0 auto 1rem;
+      background: var(--bg2); border: 3px solid var(--border);
       display: flex; align-items: center; justify-content: center;
-      font-size: 2rem; color: var(--text3);
-      overflow: hidden;
+      font-size: 2rem; overflow: hidden;
     }
     .member-photo img { width: 100%; height: 100%; object-fit: cover; }
-    .member-name {
-      font-weight: 600; font-size: 0.95rem;
-      color: var(--text); margin-bottom: 0.25rem;
-    }
-    .member-role {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--accent);
-      letter-spacing: 0.04em;
-      margin-bottom: 0.75rem;
-    }
-    .member-bio {
-      font-size: 0.82rem;
-      color: var(--text3);
-      line-height: 1.5;
-      margin-bottom: 1rem;
-    }
-    .member-email {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--text3);
-    }
+    .member-name { font-weight: 600; font-size: 0.95rem; color: var(--navy); margin-bottom: 0.25rem; }
+    .member-role { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); letter-spacing: 0.04em; margin-bottom: 0.75rem; }
+    .member-bio { font-size: 0.8rem; color: var(--text2); line-height: 1.5; margin-bottom: 0.75rem; }
+    .member-email { font-family: var(--mono); font-size: 0.7rem; color: var(--text3); }
     .member-card.pi-card {
-      grid-column: 1 / -1;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 1.5rem;
-      text-align: left;
-      padding: 2rem;
+      grid-column: 1 / -1; display: grid;
+      grid-template-columns: auto 1fr; gap: 2rem;
+      text-align: left; padding: 2rem 2.5rem;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      border-color: transparent; color: white;
     }
-    .pi-card .member-photo { width: 100px; height: 100px; margin: 0; }
-    .pi-card .member-name { font-size: 1.15rem; }
-    .pi-card .member-bio { font-size: 0.88rem; color: var(--text2); }
+    .pi-card .member-photo { width: 100px; height: 100px; margin: 0; border-color: rgba(255,255,255,0.3); }
+    .pi-card .member-name { font-size: 1.2rem; color: white; }
+    .pi-card .member-role { color: rgba(255,255,255,0.7); }
+    .pi-card .member-bio { color: rgba(255,255,255,0.85); font-size: 0.88rem; }
+    .pi-card .member-email { color: rgba(255,255,255,0.6); }
+
+    /* ─── PATENTS / CONFERENCES / PROJECTS ──────────── */
+    #patents, #projects { background: var(--bg2); max-width: 100%; padding-left: 0; padding-right: 0; }
+    #patents > *, #projects > * { max-width: 1280px; margin-left: auto; margin-right: auto; padding-left: 2rem; padding-right: 2rem; }
+    #conferences { background: var(--bg); }
 
     /* ─── NEWS ──────────────────────────────────────── */
     #news { background: var(--bg2); max-width: 100%; padding-left: 0; padding-right: 0; }
-    #news > * { max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 2rem; padding-right: 2rem; }
-    .news-list { display: flex; flex-direction: column; gap: 0; }
+    #news > * { max-width: 1280px; margin-left: auto; margin-right: auto; padding-left: 2rem; padding-right: 2rem; }
+    .news-list { display: flex; flex-direction: column; }
     .news-item {
-      display: grid;
-      grid-template-columns: 130px 1fr;
-      gap: 0 2rem;
-      padding: 1.5rem 0;
+      display: grid; grid-template-columns: 130px 1fr;
+      gap: 0 2rem; padding: 1.5rem 0;
       border-bottom: 1px solid var(--border);
     }
     .news-item:first-child { border-top: 1px solid var(--border); }
-    .news-date {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--text3);
-      padding-top: 0.15rem;
-    }
+    .news-date { font-family: var(--mono); font-size: 0.75rem; color: var(--text3); padding-top: 0.15rem; }
     .news-badge {
-      display: inline-block;
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      padding: 0.15rem 0.5rem;
-      border-radius: 3px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
+      display: inline-block; font-family: var(--mono); font-size: 0.63rem;
+      padding: 0.15rem 0.5rem; border-radius: 3px;
+      text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.4rem;
     }
-    .badge-paper { background: rgba(99,179,237,0.12); color: var(--accent); }
-    .badge-award { background: rgba(246,173,85,0.12); color: var(--gold); }
-    .badge-member { background: rgba(104,211,145,0.12); color: #68d391; }
-    .badge-conference { background: rgba(183,148,244,0.12); color: #b794f4; }
-    .news-title {
-      font-weight: 500;
-      font-size: 0.95rem;
-      color: var(--text);
-      margin-bottom: 0.4rem;
-    }
-    .news-body { font-size: 0.85rem; color: var(--text2); line-height: 1.6; }
+    .badge-paper { background: rgba(29,111,164,0.1); color: var(--accent); }
+    .badge-award { background: rgba(200,146,42,0.12); color: var(--gold); }
+    .badge-member { background: rgba(39,174,96,0.1); color: #27ae60; }
+    .badge-conference { background: rgba(142,68,173,0.1); color: #8e44ad; }
+    .news-title { font-weight: 600; font-size: 0.92rem; color: var(--navy); margin-bottom: 0.3rem; }
+    .news-body { font-size: 0.84rem; color: var(--text2); line-height: 1.6; }
 
     /* ─── CONTACT ───────────────────────────────────── */
     #contact { background: var(--bg); }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-    }
-    .contact-block h3 {
-      font-family: var(--serif);
-      font-size: 1.3rem;
-      color: var(--text);
-      margin-bottom: 1.5rem;
-    }
-    .contact-item {
-      display: flex; gap: 1rem; align-items: flex-start;
-      margin-bottom: 1.25rem;
-    }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .contact-block h3 { font-family: var(--serif); font-size: 1.4rem; color: var(--navy); margin-bottom: 1.5rem; }
+    .contact-item { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.25rem; }
     .contact-icon {
-      width: 36px; height: 36px; flex-shrink: 0;
-      background: var(--surface);
-      border: 1px solid var(--border);
+      width: 38px; height: 38px; flex-shrink: 0;
+      background: var(--bg2); border: 1px solid var(--border);
       border-radius: var(--radius);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.9rem;
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
     }
-    .contact-info-label {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--text3);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 0.2rem;
-    }
-    .contact-info-val {
-      font-size: 0.9rem;
-      color: var(--text2);
-    }
+    .contact-info-label { font-family: var(--mono); font-size: 0.68rem; color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.2rem; }
+    .contact-info-val { font-size: 0.9rem; color: var(--text2); }
     .join-box {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 2rem;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      border-radius: 12px; padding: 2.5rem; color: white;
     }
-    .join-box h3 {
-      font-family: var(--serif);
-      font-size: 1.3rem;
-      color: var(--text);
-      margin-bottom: 0.75rem;
-    }
-    .join-box p {
-      font-size: 0.88rem;
-      color: var(--text2);
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-    }
+    .join-box h3 { font-family: var(--serif); font-size: 1.4rem; color: white; margin-bottom: 0.75rem; }
+    .join-box p { font-size: 0.9rem; color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: 1.75rem; }
+    .btn-white { background: white; color: var(--navy); border: none; }
+    .btn-white:hover { background: var(--bg2); color: var(--navy); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
 
     /* ─── Footer ────────────────────────────────────── */
-    footer {
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      padding: 2rem;
-      text-align: center;
-    }
-    .footer-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 1rem; flex-wrap: wrap;
-    }
-    .footer-logo {
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      color: var(--text3);
-    }
-    .footer-copy {
-      font-size: 0.78rem;
-      color: var(--text3);
-    }
+    footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.1); padding: 2rem; }
+    .footer-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .footer-logo { font-family: var(--mono); font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
 
-    /* ─── Animations ────────────────────────────────── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .reveal {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    /* ─── Loading ────────────────────────────────────── */
+    /* ─── Loader ────────────────────────────────────── */
     #loader {
       position: fixed; inset: 0; z-index: 999;
-      background: var(--bg);
+      background: white;
       display: flex; align-items: center; justify-content: center;
       transition: opacity 0.5s;
     }
     #loader.done { opacity: 0; pointer-events: none; }
-    .loader-text {
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      color: var(--accent);
-      letter-spacing: 0.2em;
+    .loader-inner { text-align: center; }
+    .loader-badge {
+      display: inline-block; background: var(--navy); color: white;
+      font-family: var(--mono); font-size: 1rem; font-weight: 500;
+      padding: 0.5rem 1.2rem; border-radius: 6px; letter-spacing: 0.1em;
+      margin-bottom: 1rem;
     }
+    .loader-bar {
+      width: 120px; height: 2px; background: var(--bg2);
+      border-radius: 2px; overflow: hidden; margin: 0 auto;
+    }
+    .loader-bar::after {
+      content: ''; display: block; width: 40%;
+      height: 100%; background: var(--navy);
+      animation: loadSlide 1s ease infinite;
+    }
+    @keyframes loadSlide { 0%{transform:translateX(-100%)} 100%{transform:translateX(350%)} }
+
+    /* ─── Animations ────────────────────────────────── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:none} }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity:1; transform:none; }
 
     /* ─── Responsive ────────────────────────────────── */
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; padding-top: calc(var(--nav-h) + 2rem); min-height: auto; padding-bottom: 4rem; }
+      .hero-right { order: -1; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
       .nav-links.open {
         display: flex; flex-direction: column;
         position: fixed; top: var(--nav-h); left: 0; right: 0;
-        background: var(--bg2);
-        border-bottom: 1px solid var(--border);
-        padding: 1rem 2rem 1.5rem;
-        gap: 1.25rem;
+        background: white; border-bottom: 1px solid var(--border);
+        padding: 1rem 1.5rem 1.5rem; gap: 0.25rem;
+        box-shadow: var(--shadow2);
       }
-      .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
       .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
       .news-item { grid-template-columns: 1fr; gap: 0.25rem; }
       .pub-item { grid-template-columns: 1fr; }
-      .pub-year { font-size: 0.75rem; margin-bottom: 0.25rem; }
       .member-card.pi-card { grid-template-columns: 1fr; text-align: center; }
       .pi-card .member-photo { margin: 0 auto; }
     }
@@ -612,12 +473,20 @@
 <body>
 
 <!-- Loader -->
-<div id="loader"><span class="loader-text">SRDL ···</span></div>
+<div id="loader">
+  <div class="loader-inner">
+    <div class="loader-badge">SRDL</div>
+    <div class="loader-bar"></div>
+  </div>
+</div>
 
 <!-- Navigation -->
 <nav>
   <div class="nav-inner">
-    <div class="nav-logo">SRDL<span>/</span><span id="nav-uni"></span></div>
+    <div class="nav-logo">
+      <span class="nav-logo-badge">SRDL</span>
+      <span class="nav-logo-text" id="nav-uni"></span>
+    </div>
     <ul class="nav-links" id="nav-links">
       <li><a href="#home">Home</a></li>
       <li><a href="#research">Research</a></li>
@@ -637,19 +506,27 @@
 
 <!-- ══ HERO ══════════════════════════════════════════ -->
 <section id="home">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-content">
-    <p class="hero-eyebrow" id="hero-eyebrow"></p>
-    <h1 class="hero-title" id="hero-title"></h1>
-    <p class="hero-title-kr" id="hero-title-kr"></p>
-    <p class="hero-desc" id="hero-desc"></p>
-    <div class="hero-tags" id="hero-tags"></div>
-    <div class="hero-btns">
-      <a href="#research" class="btn btn-primary">Explore Research →</a>
-      <a href="#publications" class="btn btn-outline">Publications</a>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <p class="hero-eyebrow" id="hero-eyebrow"></p>
+      <h1 class="hero-title" id="hero-title"></h1>
+      <p class="hero-title-kr" id="hero-title-kr"></p>
+      <p class="hero-desc" id="hero-desc"></p>
+      <div class="hero-tags" id="hero-tags"></div>
+      <div class="hero-btns">
+        <a href="#research" class="btn btn-primary">Explore Research →</a>
+        <a href="#publications" class="btn btn-outline">Publications</a>
+      </div>
+      <div class="hero-stats" id="hero-stats"></div>
     </div>
-    <div class="hero-stats" id="hero-stats"></div>
+    <div class="hero-right">
+      <div class="slideshow-wrapper">
+        <div class="slideshow" id="slideshow">
+          <!-- slides injected by JS -->
+        </div>
+        <div class="slide-dots" id="slide-dots"></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -669,7 +546,7 @@
 <section id="publications">
   <div>
     <p class="section-label reveal">Publications</p>
-    <h2 class="section-title reveal">Selected Works</h2>
+    <h2 class="section-title reveal">Journal Papers</h2>
     <div class="pub-filters reveal" id="pub-filters"></div>
     <div class="pub-list reveal" id="pub-list"></div>
   </div>
@@ -686,23 +563,14 @@
 
 <div class="divider"></div>
 
-<!-- ══ NEWS ══════════════════════════════════════════ -->
-<section id="news">
-  <div>
-    <p class="section-label reveal">Latest</p>
-    <h2 class="section-title reveal">News & Updates</h2>
-    <div class="news-list reveal" id="news-list"></div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
 <!-- ══ PATENTS ═══════════════════════════════════════ -->
 <section id="patents">
-  <p class="section-label reveal">Patents</p>
-  <h2 class="section-title reveal">특허 현황</h2>
-  <div class="pub-filters reveal" id="patent-filters"></div>
-  <div class="pub-list reveal" id="patent-list"></div>
+  <div>
+    <p class="section-label reveal">Patents</p>
+    <h2 class="section-title reveal">특허 현황</h2>
+    <div class="pub-filters reveal" id="patent-filters"></div>
+    <div class="pub-list reveal" id="patent-list"></div>
+  </div>
 </section>
 
 <div class="divider"></div>
@@ -719,9 +587,22 @@
 
 <!-- ══ PROJECTS ══════════════════════════════════════ -->
 <section id="projects">
-  <p class="section-label reveal">Research Projects</p>
-  <h2 class="section-title reveal">과제 수행현황</h2>
-  <div class="pub-list reveal" id="project-list"></div>
+  <div>
+    <p class="section-label reveal">Research Projects</p>
+    <h2 class="section-title reveal">과제 수행현황</h2>
+    <div class="pub-list reveal" id="project-list"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ NEWS ══════════════════════════════════════════ -->
+<section id="news">
+  <div>
+    <p class="section-label reveal">Latest</p>
+    <h2 class="section-title reveal">News & Updates</h2>
+    <div class="news-list reveal" id="news-list"></div>
+  </div>
 </section>
 
 <div class="divider"></div>
@@ -739,7 +620,7 @@
       <div class="join-box">
         <h3>Join Our Lab</h3>
         <p>We are always looking for motivated students interested in 2D semiconductor and perovskite optoelectronics. Prospective graduate students (M.S. and Ph.D.) and undergraduate researchers are welcome to reach out.</p>
-        <a id="contact-email-btn" href="#" class="btn btn-primary">Send an Email →</a>
+        <a id="contact-email-btn" href="#" class="btn btn-white">Send an Email →</a>
       </div>
     </div>
   </div>
@@ -754,63 +635,99 @@
 </footer>
 
 <script>
-// ════════════════════════════════════════════════════
-// Site Engine — 각 content/*.json 파일을 개별 로드
-// ════════════════════════════════════════════════════
 async function loadJSON(file) {
   const res = await fetch(`content/${file}`);
   return res.json();
 }
 
 async function init() {
-  // 모든 파일 병렬 로드
   const [lab, research, members, publications, news, patents, conferences, projects] =
     await Promise.all([
-      loadJSON('lab.json'),
-      loadJSON('research.json'),
-      loadJSON('members.json'),
-      loadJSON('publications.json'),
-      loadJSON('news.json'),
-      loadJSON('patents.json'),
-      loadJSON('conferences.json'),
-      loadJSON('projects.json'),
+      loadJSON('lab.json'), loadJSON('research.json'), loadJSON('members.json'),
+      loadJSON('publications.json'), loadJSON('news.json'), loadJSON('patents.json'),
+      loadJSON('conferences.json'), loadJSON('projects.json'),
     ]);
 
-  // ── Nav ──
-  document.getElementById('nav-uni').textContent = lab.acronym;
+  // ── Nav & Title ──
+  document.getElementById('nav-uni').textContent = lab.university;
   document.title = `${lab.acronym} – ${lab.name}`;
 
   // ── Hero ──
-  document.getElementById('hero-eyebrow').textContent =
-    `${lab.department} · ${lab.university}`;
+  document.getElementById('hero-eyebrow').textContent = `${lab.department} · ${lab.university}`;
   document.getElementById('hero-title').innerHTML =
-    `${lab.name.replace('Semiconductor', '<em>Semiconductor</em>')}`;
+    lab.name.replace('Semiconductor', '<em>Semiconductor</em>');
   document.getElementById('hero-title-kr').textContent = lab.name_kr;
   document.getElementById('hero-desc').textContent = lab.description;
 
   const tagsEl = document.getElementById('hero-tags');
   lab.keywords.forEach(k => {
     const s = document.createElement('span');
-    s.className = 'tag'; s.textContent = k;
-    tagsEl.appendChild(s);
+    s.className = 'tag'; s.textContent = k; tagsEl.appendChild(s);
   });
 
   const pubCount    = publications.length;
   const memberCount = members.filter(m => m.id !== 'pi').length;
-  const years       = new Date().getFullYear() - parseInt(
-    members.find(m=>m.id==='pi')?.joined || '2015');
+  const years       = new Date().getFullYear() - parseInt(members.find(m=>m.id==='pi')?.joined||'2015');
   const statsEl = document.getElementById('hero-stats');
-  [
-    [pubCount + '+', 'Publications'],
-    [memberCount,    'Lab Members'],
-    [years + '+',    'Years Active'],
-    [research.length,'Research Areas']
-  ].forEach(([n, l]) => {
-    statsEl.innerHTML += `<div>
-      <div class="stat-num">${n}</div>
-      <div class="stat-label">${l}</div>
-    </div>`;
+  [[pubCount+'+','Publications'],[memberCount,'Lab Members'],[years+'+','Years Active'],[research.length,'Research Areas']]
+    .forEach(([n,l]) => {
+      statsEl.innerHTML += `<div><div class="stat-num">${n}</div><div class="stat-label">${l}</div></div>`;
+    });
+
+  // ── Slideshow ──
+  // Slides come from publications with highlight:true, using cover_image field
+  // Falls back to a styled placeholder card
+  const highlights = publications.filter(p => p.highlight);
+  const slideshowEl = document.getElementById('slideshow');
+  const dotsEl = document.getElementById('slide-dots');
+  let currentSlide = 0;
+  let slideTimer;
+
+  highlights.forEach((p, i) => {
+    const slide = document.createElement('div');
+    slide.className = `slide${i===0?' active':''}`;
+    if (p.cover_image) {
+      slide.innerHTML = `
+        <img src="${p.cover_image}" alt="${p.title}" />
+        <div class="slide-caption">
+          <div class="slide-caption-journal">${p.journal} ${p.volume||''}</div>
+          <div class="slide-caption-title">${p.title}</div>
+        </div>`;
+    } else {
+      slide.innerHTML = `
+        <div class="slide-placeholder">
+          <div class="slide-journal">${p.journal} · ${p.year}</div>
+          <div class="slide-title">${p.title}</div>
+          <div class="slide-authors">${p.authors}</div>
+        </div>`;
+    }
+    slideshowEl.appendChild(slide);
+
+    const dot = document.createElement('div');
+    dot.className = `slide-dot${i===0?' active':''}`;
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsEl.appendChild(dot);
   });
+
+  // Nav buttons
+  if (highlights.length > 1) {
+    slideshowEl.innerHTML += `
+      <div class="slide-nav">
+        <button class="slide-btn" id="slide-prev">‹</button>
+        <button class="slide-btn" id="slide-next">›</button>
+      </div>`;
+    document.getElementById('slide-prev').addEventListener('click', () => goToSlide((currentSlide - 1 + highlights.length) % highlights.length));
+    document.getElementById('slide-next').addEventListener('click', () => goToSlide((currentSlide + 1) % highlights.length));
+  }
+
+  function goToSlide(n) {
+    document.querySelectorAll('.slide').forEach((s,i) => s.classList.toggle('active', i===n));
+    document.querySelectorAll('.slide-dot').forEach((d,i) => d.classList.toggle('active', i===n));
+    currentSlide = n;
+    clearInterval(slideTimer);
+    slideTimer = setInterval(() => goToSlide((currentSlide+1)%highlights.length), 5000);
+  }
+  if (highlights.length > 1) slideTimer = setInterval(() => goToSlide((currentSlide+1)%highlights.length), 5000);
 
   // ── Research ──
   document.getElementById('research-sub').textContent =
@@ -819,11 +736,8 @@ async function init() {
   research.forEach(r => {
     rg.innerHTML += `<div class="research-card">
       <div class="research-icon">${r.icon}</div>
-      <h3>${r.title}</h3>
-      <p>${r.description}</p>
-      <div class="research-topics">
-        ${r.topics.map(t=>`<span class="topic-tag">${t}</span>`).join('')}
-      </div>
+      <h3>${r.title}</h3><p>${r.description}</p>
+      <div class="research-topics">${r.topics.map(t=>`<span class="topic-tag">${t}</span>`).join('')}</div>
     </div>`;
   });
 
@@ -831,59 +745,46 @@ async function init() {
   const pubYears = [...new Set(publications.map(p=>p.year))].sort((a,b)=>b-a);
   let activePubYear = 'all';
   const pubFiltersEl = document.getElementById('pub-filters');
-
   function renderPubs() {
     const listEl = document.getElementById('pub-list');
-    const filtered = activePubYear === 'all'
-      ? publications
-      : publications.filter(p => p.year === activePubYear);
-    listEl.innerHTML = filtered.sort((a,b)=>b.year-a.year).map(p => `
-      <div class="pub-item ${p.highlight ? 'pub-highlight' : ''}">
+    const filtered = activePubYear==='all' ? publications : publications.filter(p=>p.year===activePubYear);
+    listEl.innerHTML = filtered.sort((a,b)=>b.year-a.year).map(p=>`
+      <div class="pub-item ${p.highlight?'pub-highlight':''}">
         <div class="pub-year">${p.year}</div>
         <div>
-          <div class="pub-title">${p.title}
-            ${p.highlight ? '<span class="pub-star">★ Featured</span>' : ''}
-          </div>
+          <div class="pub-title">${p.title}${p.highlight?'<span class="pub-star">★ Featured</span>':''}</div>
           <div class="pub-authors">${p.authors}</div>
-          <div class="pub-journal">${p.journal}${p.volume ? `, ${p.volume}` : ''}${p.pages ? `, ${p.pages}` : ''}</div>
-          ${p.doi ? `<a class="pub-doi" href="https://doi.org/${p.doi}" target="_blank">DOI: ${p.doi}</a>` : ''}
+          <div class="pub-journal">${p.journal}${p.volume?`, ${p.volume}`:''}${p.pages?`, ${p.pages}`:''}</div>
+          ${p.doi?`<a class="pub-doi" href="https://doi.org/${p.doi}" target="_blank">DOI: ${p.doi}</a>`:''}
         </div>
       </div>`).join('');
   }
-
   pubFiltersEl.innerHTML = `<button class="pub-filter active" data-year="all">All</button>` +
-    pubYears.map(y => `<button class="pub-filter" data-year="${y}">${y}</button>`).join('');
+    pubYears.map(y=>`<button class="pub-filter" data-year="${y}">${y}</button>`).join('');
   pubFiltersEl.addEventListener('click', e => {
     if (!e.target.matches('.pub-filter')) return;
     document.querySelectorAll('#pub-filters .pub-filter').forEach(b=>b.classList.remove('active'));
     e.target.classList.add('active');
-    activePubYear = e.target.dataset.year === 'all' ? 'all' : parseInt(e.target.dataset.year);
+    activePubYear = e.target.dataset.year==='all' ? 'all' : parseInt(e.target.dataset.year);
     renderPubs();
   });
   renderPubs();
 
   // ── Members ──
   const mg = document.getElementById('members-grid');
-  const pi = members.find(m => m.id === 'pi');
-  const others = members.filter(m => m.id !== 'pi');
-  if (pi) {
-    mg.innerHTML += `<div class="member-card pi-card">
-      <div class="member-photo">
-        <img src="${pi.photo}" alt="${pi.name}" onerror="this.parentElement.textContent='👤'" />
-      </div>
-      <div>
-        <div class="member-role">Principal Investigator</div>
-        <div class="member-name">${pi.name}</div>
-        <div class="member-bio" style="margin-top:0.5rem">${pi.bio}</div>
-        <div class="member-email" style="margin-top:0.75rem">✉ ${pi.email}</div>
-      </div>
-    </div>`;
-  }
+  const pi = members.find(m=>m.id==='pi');
+  const others = members.filter(m=>m.id!=='pi');
+  if (pi) mg.innerHTML += `<div class="member-card pi-card">
+    <div class="member-photo"><img src="${pi.photo}" alt="${pi.name}" onerror="this.parentElement.textContent='👤'"/></div>
+    <div>
+      <div class="member-role">Principal Investigator</div>
+      <div class="member-name">${pi.name}</div>
+      <div class="member-bio" style="margin-top:0.5rem">${pi.bio}</div>
+      <div class="member-email" style="margin-top:0.75rem">✉ ${pi.email}</div>
+    </div></div>`;
   others.forEach(m => {
     mg.innerHTML += `<div class="member-card">
-      <div class="member-photo">
-        <img src="${m.photo}" alt="${m.name}" onerror="this.parentElement.textContent='👤'" />
-      </div>
+      <div class="member-photo"><img src="${m.photo}" alt="${m.name}" onerror="this.parentElement.textContent='👤'"/></div>
       <div class="member-name">${m.name}</div>
       <div class="member-role">${m.role}</div>
       <div class="member-bio">${m.bio}</div>
@@ -892,101 +793,76 @@ async function init() {
   });
 
   // ── Patents ──
-  const patTypeMap = { '국내': 'badge-member', '국제': 'badge-paper' };
-  const patStatusMap = { '등록': 'badge-paper', '출원': 'badge-conference', '심사중': 'badge-award' };
-  const patTypes = ['전체', '국내', '국제'];
+  const patTypeMap = {'국내':'badge-member','국제':'badge-paper'};
+  const patStatusMap = {'등록':'badge-paper','출원':'badge-conference','심사중':'badge-award'};
   let activePatType = '전체';
   const patFiltersEl = document.getElementById('patent-filters');
-
   function renderPatents() {
     const listEl = document.getElementById('patent-list');
-    const filtered = activePatType === '전체'
-      ? patents
-      : patents.filter(p => p.type === activePatType);
-    listEl.innerHTML = filtered.map(p => `
+    const filtered = activePatType==='전체' ? patents : patents.filter(p=>p.type===activePatType);
+    listEl.innerHTML = filtered.map(p=>`
       <div class="pub-item">
-        <div class="pub-year">
-          <span class="news-badge ${patTypeMap[p.type]||'badge-paper'}">${p.type}</span>
-        </div>
+        <div class="pub-year"><span class="news-badge ${patTypeMap[p.type]||'badge-paper'}">${p.type}</span></div>
         <div>
-          <div class="pub-title">${p.title}
-            <span class="news-badge ${patStatusMap[p.status]||'badge-paper'}" style="margin-left:0.5rem">${p.status}</span>
-          </div>
+          <div class="pub-title">${p.title} <span class="news-badge ${patStatusMap[p.status]||'badge-paper'}">${p.status}</span></div>
           <div class="pub-authors">${p.inventors}</div>
           <div class="pub-journal">${p.registration_no} · ${p.registration_date} · ${p.applicant}</div>
         </div>
       </div>`).join('');
   }
-
-  patFiltersEl.innerHTML = patTypes.map((t,i) =>
-    `<button class="pub-filter ${i===0?'active':''}" data-type="${t}">${t}</button>`
-  ).join('');
+  patFiltersEl.innerHTML = ['전체','국내','국제'].map((t,i)=>
+    `<button class="pub-filter ${i===0?'active':''}" data-type="${t}">${t}</button>`).join('');
   patFiltersEl.addEventListener('click', e => {
     if (!e.target.matches('.pub-filter')) return;
     document.querySelectorAll('#patent-filters .pub-filter').forEach(b=>b.classList.remove('active'));
-    e.target.classList.add('active');
-    activePatType = e.target.dataset.type;
-    renderPatents();
+    e.target.classList.add('active'); activePatType = e.target.dataset.type; renderPatents();
   });
   renderPatents();
 
   // ── Conferences ──
-  const confTypes = ['전체', '국제', '국내'];
   let activeConfType = '전체';
   const confFiltersEl = document.getElementById('conf-filters');
-  const presTypeMap = { '초청강연': 'badge-award', '구두발표': 'badge-paper', '포스터': 'badge-member' };
-
+  const presTypeMap = {'초청강연':'badge-award','구두발표':'badge-paper','포스터':'badge-member'};
   function renderConferences() {
     const listEl = document.getElementById('conf-list');
-    const filtered = activeConfType === '전체'
-      ? conferences
-      : conferences.filter(c => c.type === activeConfType);
-    listEl.innerHTML = [...filtered].sort((a,b)=>b.year-a.year).map(c => `
+    const filtered = activeConfType==='전체' ? conferences : conferences.filter(c=>c.type===activeConfType);
+    listEl.innerHTML = [...filtered].sort((a,b)=>b.year-a.year).map(c=>`
       <div class="pub-item">
         <div class="pub-year">${c.year}</div>
         <div>
-          <div class="pub-title">${c.title}
-            <span class="news-badge ${presTypeMap[c.presentation_type]||'badge-paper'}" style="margin-left:0.5rem">${c.presentation_type}</span>
-          </div>
+          <div class="pub-title">${c.title} <span class="news-badge ${presTypeMap[c.presentation_type]||'badge-paper'}">${c.presentation_type}</span></div>
           <div class="pub-authors">${c.authors}</div>
           <div class="pub-journal">${c.conference} · ${c.location} · ${c.date}</div>
         </div>
       </div>`).join('');
   }
-
-  confFiltersEl.innerHTML = confTypes.map((t,i) =>
-    `<button class="pub-filter ${i===0?'active':''}" data-type="${t}">${t}</button>`
-  ).join('');
+  confFiltersEl.innerHTML = ['전체','국제','국내'].map((t,i)=>
+    `<button class="pub-filter ${i===0?'active':''}" data-type="${t}">${t}</button>`).join('');
   confFiltersEl.addEventListener('click', e => {
     if (!e.target.matches('.pub-filter')) return;
     document.querySelectorAll('#conf-filters .pub-filter').forEach(b=>b.classList.remove('active'));
-    e.target.classList.add('active');
-    activeConfType = e.target.dataset.type;
-    renderConferences();
+    e.target.classList.add('active'); activeConfType = e.target.dataset.type; renderConferences();
   });
   renderConferences();
 
   // ── Projects ──
-  const projStatusColor = { '진행중': 'badge-paper', '완료': 'badge-member' };
+  const projStatusColor = {'진행중':'badge-paper','완료':'badge-member'};
   const projEl = document.getElementById('project-list');
-  [...projects].sort((a,b) => b.start_date.localeCompare(a.start_date)).forEach(p => {
-    projEl.innerHTML += `
-      <div class="pub-item">
-        <div class="pub-year">
-          <span class="news-badge ${projStatusColor[p.status]||'badge-paper'}">${p.status}</span>
-        </div>
-        <div>
-          <div class="pub-title">${p.title}</div>
-          ${p.title_en ? `<div class="pub-authors" style="font-style:italic">${p.title_en}</div>` : ''}
-          <div class="pub-journal">${p.agency} · ${p.program}</div>
-          <div class="pub-journal" style="margin-top:0.2rem">📅 ${p.start_date} ~ ${p.end_date} &nbsp;|&nbsp; 💰 ${p.amount} &nbsp;|&nbsp; PI: ${p.pi}</div>
-        </div>
-      </div>`;
+  [...projects].sort((a,b)=>b.start_date.localeCompare(a.start_date)).forEach(p => {
+    projEl.innerHTML += `<div class="pub-item">
+      <div class="pub-year"><span class="news-badge ${projStatusColor[p.status]||'badge-paper'}">${p.status}</span></div>
+      <div>
+        <div class="pub-title">${p.title}</div>
+        ${p.title_en?`<div class="pub-authors" style="font-style:italic">${p.title_en}</div>`:''}
+        <div class="pub-journal">${p.agency} · ${p.program}</div>
+        <div class="pub-journal" style="margin-top:0.2rem">📅 ${p.start_date} ~ ${p.end_date} &nbsp;|&nbsp; 💰 ${p.amount} &nbsp;|&nbsp; PI: ${p.pi}</div>
+      </div>
+    </div>`;
   });
 
   // ── News ──
-  const badgeMap = { paper:'badge-paper', award:'badge-award', member:'badge-member', conference:'badge-conference' };
-  const labelMap = { paper:'Paper', award:'Award', member:'New Member', conference:'Conference' };
+  const badgeMap = {paper:'badge-paper',award:'badge-award',member:'badge-member',conference:'badge-conference'};
+  const labelMap = {paper:'Paper',award:'Award',member:'New Member',conference:'Conference'};
   const nl = document.getElementById('news-list');
   news.sort((a,b)=>b.date.localeCompare(a.date)).forEach(n => {
     const d = new Date(n.date);
@@ -1003,19 +879,13 @@ async function init() {
 
   // ── Contact ──
   const ci = document.getElementById('contact-items');
-  const icons = { address:'📍', phone:'📞', email:'✉️', office:'🏢' };
-  [
-    { key:'address', label:'Address',   val: lab.address },
-    { key:'office',  label:'Office',    val: lab.pi.office },
-    { key:'phone',   label:'Phone',     val: lab.pi.phone },
-    { key:'email',   label:'Email',     val: `<a href="mailto:${lab.pi.email}">${lab.pi.email}</a>` },
-  ].forEach(({key,label,val}) => {
+  [{key:'address',label:'Address',val:lab.address},{key:'office',label:'Office',val:lab.pi.office},
+   {key:'phone',label:'Phone',val:lab.pi.phone},{key:'email',label:'Email',val:`<a href="mailto:${lab.pi.email}">${lab.pi.email}</a>`}]
+  .forEach(({key,label,val}) => {
+    const icons = {address:'📍',phone:'📞',email:'✉️',office:'🏢'};
     ci.innerHTML += `<div class="contact-item">
       <div class="contact-icon">${icons[key]}</div>
-      <div>
-        <div class="contact-info-label">${label}</div>
-        <div class="contact-info-val">${val}</div>
-      </div>
+      <div><div class="contact-info-label">${label}</div><div class="contact-info-val">${val}</div></div>
     </div>`;
   });
   document.getElementById('contact-email-btn').href = `mailto:${lab.pi.email}`;
@@ -1024,20 +894,20 @@ async function init() {
   document.getElementById('footer-logo').textContent = `${lab.acronym} · ${lab.university}`;
   document.getElementById('footer-copy').textContent = `© ${new Date().getFullYear()} ${lab.name}`;
 
-  // ── Loader dismiss ──
+  // ── Loader ──
   document.getElementById('loader').classList.add('done');
 
   // ── Scroll reveal ──
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
+  }, {threshold: 0.08});
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   // ── Active nav ──
-  const sections = document.querySelectorAll('section[id]');
+  const allSections = document.querySelectorAll('section[id]');
   window.addEventListener('scroll', () => {
     let current = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+    allSections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
     document.querySelectorAll('.nav-links a').forEach(a => {
       a.classList.toggle('active', a.getAttribute('href') === '#' + current);
     });
@@ -1051,6 +921,5 @@ async function init() {
 
 init().catch(console.error);
 </script>
-
 </body>
 </html>
