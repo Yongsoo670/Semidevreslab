@@ -374,7 +374,8 @@
     "volume": "14(4)",
     "pages": "4366–4373",
     "doi": "10.1021/acsnano.9b09901",
-    "highlight": false
+    "highlight": true,
+    "cover_image": "assets/images/covers/cover_acs_nano_2020.jpg"   
   },
   {
     "id": "pub2020a",
@@ -440,7 +441,8 @@
     "volume": "11(9)",
     "pages": "8822–8829",
     "doi": "10.1021/acsnano.7b02914",
-    "highlight": false
+    "highlight": true,
+    "cover_image": "assets/images/covers/cover_acs_nano_2017.jpg"    
   },
   {
     "id": "pub2017b",
@@ -465,18 +467,7 @@
     "highlight": false
   },
   {
-    "id": "pub2015c",
-    "year": 2015,
-    "title": "Hybrid Germanium Iodide Perovskite Semiconductors: Active Lone Pairs, Structural Distortions, Direct and Indirect Energy Gaps and Strong Nonlinear Optical Properties",
-    "authors": "Constantinos C. Stoumpos, N. Laszlo Fraser, Daniel J. Clark, Yong S. Kim, Sonny Rhim, Arthur J. Freeman, John B. Ketterson, Joon I. Jang, Mercouri G. Kanatzidis*",
-    "journal": "Journal of the American Chemical Society",
-    "volume": "137(21)",
-    "pages": "6804–6819",
-    "doi": "10.1021/jacs.5b01025",
-    "highlight": false
-  },
-  {
-    "id": "pub2016b",
+    "id": "pub2016a",
     "year": 2016,
     "title": "Nonlinear Optical Characteristics of Monolayer MoSe₂",
     "authors": "Chinh Tam Le, Daniel J. Clark, Farman Ullah, Velusamy Senthilkumar, Joon I. Jang*, Y. Sim, M.-J. Seong, K.-H. Chung, H. Park, Yong Soo Kim*",
@@ -486,6 +477,17 @@
     "doi": "10.1002/andp.201600006",
     "highlight": true,
     "cover_image": "assets/images/covers/cover_annalen_physik_2016.jpg"
+  },
+  {
+    "id": "pub2015a",
+    "year": 2015,
+    "title": "Hybrid Germanium Iodide Perovskite Semiconductors: Active Lone Pairs, Structural Distortions, Direct and Indirect Energy Gaps and Strong Nonlinear Optical Properties",
+    "authors": "Constantinos C. Stoumpos, N. Laszlo Fraser, Daniel J. Clark, Yong S. Kim, Sonny Rhim, Arthur J. Freeman, John B. Ketterson, Joon I. Jang, Mercouri G. Kanatzidis*",
+    "journal": "Journal of the American Chemical Society",
+    "volume": "137(21)",
+    "pages": "6804–6819",
+    "doi": "10.1021/jacs.5b01025",
+    "highlight": false
   },
   {
     "id": "pub2014a",
