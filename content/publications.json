@@ -1,5 +1,16 @@
 [
   {
+    "id": "pub2026c",
+    "year": 2026,
+    "title": "Polarity-Programmable Bismuth Oxide Overlayers on Bi(111)/MoS2 Heterostructures via Oxidation and Annealing",
+    "authors": "Sang Wook Han†*, W. S. Yun†, S. Seong, J. Kang, M. Ko, S. Ryu, and Yong Soo Kim*, 
+    "journal": "The Journal of Physical Chemistry Letters",
+    "volume": "xxx",
+    "pages": "ASAP",
+    "doi": " https://doi.org/10.1021/acs.jpclett.6c00282",
+    "highlight": false
+  },
+  {
     "id": "pub2026b",
     "year": 2026,
     "title": "Ultrafast Multilevel Switching and Synaptic Behavior in a Planar Quantum Topological Memristor",
@@ -20,7 +31,7 @@
     "volume": "4(1)",
     "pages": "227–234",
     "doi": "10.1021/acsaom.5c00535",
-    "highlight": true
+    "highlight": false
   },
   {
     "id": "pub2025d",
@@ -42,7 +53,7 @@
     "volume": "37(33)",
     "pages": "2506270",
     "doi": "10.1002/adma.202506270",
-    "highlight": true
+    "highlight": false
   },
   {
     "id": "pub2025b",
@@ -64,7 +75,7 @@
     "volume": "25(16)",
     "pages": "6491–6498",
     "doi": "10.1021/acs.nanolett.5c00194",
-    "highlight": true
+    "highlight": false
   },
   {
     "id": "pub2024f",
@@ -210,7 +221,7 @@
     "highlight": false
   },
   {
-    "id": "pub2021l",
+    "id": "pub2021p",
     "year": 2021,
     "title": "Layer Number Dependence of Out-of-Plane Electrical Conductivity and Seebeck Coefficient in Continuous Mono- to Multilayer MoS₂ Films",
     "authors": "W.-Y. Lee, M.-S. Kang*, N.-W. Park, G.-S. Kim, Anh Duc Nguyen, J. W. Choi, Y.-G. Yoon, Y. S. Kim, H. W. Jang, E. Saitoh, S.-K. Lee*",
@@ -221,7 +232,7 @@
     "highlight": false
   },
   {
-    "id": "pub2021k",
+    "id": "pub2021o",
     "year": 2021,
     "title": "Selective Growth and Robust Valley Polarization of Bilayer 3R-MoS₂",
     "authors": "Farman Ullah†, J. Lee†, Zeeshan Tahir, A. Samad, Chinh Tam Le, J. Kim, Mamoon Ur Rashid, S. Lee, K. Kim, Joon I. Jang*, M.-J. Seong*, Yong Soo Kim*",
@@ -232,7 +243,7 @@
     "highlight": false
   },
   {
-    "id": "pub2021j",
+    "id": "pub2021n",
     "year": 2021,
     "title": "A Highly Efficient Soot Based Bilayer Solar Vapor Generator",
     "authors": "Mamoon Ur Rashid†, Zeeshan Tahir†, Sungdo Kim, Joon I. Jang*, Yong Soo Kim*",
@@ -243,7 +254,7 @@
     "highlight": false
   },
   {
-    "id": "pub2021i",
+    "id": "pub2021m",
     "year": 2021,
     "title": "Highly Efficient Solar Vapor Generation via a Simple Morphological Alteration of TiO₂ Film Grown on a Glassy Carbon Foam",
     "authors": "Sungdo Kim†, Zeeshan Tahir†, Mamoon Ur Rashid, Joon I. Jang*, Yong Soo Kim*",
@@ -255,7 +266,7 @@
     "cover_image": "assets/images/covers/cover_ace_ami_2021.jpg"
   },
   {
-    "id": "pub2021h",
+    "id": "pub2021l",
     "year": 2021,
     "title": "On the Origin of Room-Temperature Amplified Spontaneous Emission in CsPbBr₃ Single Crystal",
     "authors": "D. Kim, H. Ryu, S. Y. Lim, K. M. McCall, Jongwoo Park, Sungdo Kim, T. J. Kim, Y. S. Kim, M. G. Kanatzidis, H. Cheong, Joon I. Jang*",
@@ -266,7 +277,7 @@
     "highlight": false
   },
   {
-    "id": "pub2021g",
+    "id": "pub2021k",
     "year": 2021,
     "title": "Interface Defect Engineering of a Large-Scale CVD-Grown MoS₂ Monolayer via Residual Sodium at the SiO₂/Si Substrate",
     "authors": "S. W. Han*, J.-G. Song, J. Park, Y. H. Hwang, Tri Khoa Nguyen, Yong Soo Kim, M. Kang, C. W. Ahn, S. C. Hong*",
@@ -277,7 +288,7 @@
     "highlight": false
   },
   {
-    "id": "pub2021f",
+    "id": "pub2021j",
     "year": 2021,
     "title": "Stabilization of 6H-Hexagonal SrMnO₃ Polymorph by Al₂O₃ Insertion",
     "authors": "M. Sheeraz, Mamoon Ur Rashid, A. Ali, F. Akram, H. J. Lee, J. S. Choi, J.-S. Bae, Yong Soo Kim, Y.-H. Shin, C. W. Ahn, T. H. Kim*",
@@ -288,7 +299,7 @@
     "highlight": false
   },
   {
-    "id": "pub2021e",
+    "id": "pub2021i",
     "year": 2021,
     "title": "Experimental and Theoretical Studies on Induced Ferromagnetism of New (1-x)Na₀.₅Bi₀.₅TiO₃+xBaFeO₃ Solid",
     "authors": "D. D. Dung*, N. A. Duc, N. N. Trung, N. V. Duc, N. T. Hung, Y. S. Kim*, D. Odkhuu*",
@@ -299,7 +310,7 @@
     "highlight": false
   },
   {
-    "id": "pub2021d",
+    "id": "pub2021h",
     "year": 2021,
     "title": "Role of Ferromagnetic Monolayer WSe₂ Flakes in Pt/Y₃Fe₅O₁₂ Bilayer Structure in Longitudinal Spin Seebeck Effect",
     "authors": "W.-Y. Lee, M. S. Kang, G.-S. Kim, N.-W. Park, K.-Y. Choi, Chinh Tam Le, Mamoon Ur Rashid, E. Saitoh, Yong Soo Kim*, Sang-Kwon Lee*",
@@ -310,7 +321,7 @@
     "highlight": false
   },
   {
-    "id": "pub2021c",
+    "id": "pub2021g",
     "year": 2021,
     "title": "Growth and Thermal Stability Studies of GaTe Single Crystal",
     "authors": "T. H. Vu, A. T. Pham, V. Q. Nguyen, Anh Duc Nguyen, Thao Nhi Nguyen Tran, M. H. Nguyen Thi, Yong Soo Kim, V. T. Tran, Sunglae Cho*",
@@ -321,7 +332,7 @@
     "highlight": false
   },
   {
-    "id": "pub2021b",
+    "id": "pub2021f",
     "year": 2021,
     "title": "Enhanced Optical Absorption in Conformally Grown MoS₂ Layers on SiO₂/Si Substrates with 50-nm SiO₂ Nanopillars",
     "authors": "H. Choi, E. Kim, S. Kwon, J. Kim, Anh Duc Nguyen, S.-Y. Lee, E. Ko, S. Baek, H. H. Park, Y. C. Park, K.-J. Yee, S. Yoon, Yong Soo Kim, D.-W. Kim*",
@@ -332,7 +343,7 @@
     "highlight": false
   },
   {
-    "id": "pub2020i",
+    "id": "pub2020e",
     "year": 2020,
     "title": "TiO₂ Nanorods Array Conformally Coated with a Monolayer MoS₂: An Efficient Electrocatalyst for Hydrogen Evolution Reaction",
     "authors": "Anh Duc Nguyen†, T. H. Pham†, T. K. Nguyen, H. Ullah, Zeeshan Tahir, Y. C. Park, Jongwoo Park, J. I. Jang*, Y. H. Shin*, Yong Soo Kim*",
@@ -343,7 +354,7 @@
     "highlight": false
   },
   {
-    "id": "pub2020g",
+    "id": "pub2020d",
     "year": 2020,
     "title": "Enhanced Spin Seebeck Effect in Monolayer Tungsten Diselenide Due to Strong Spin Current Injection at Interface",
     "authors": "S.-K. Lee*, W.-Y. Lee, T. Kikkawa, Chinh Tam Le, M.-S. Kang, G.-S. Kim, Anh Duc Nguyen, Yong Soo Kim, N.-W. Park, E. Saitoh",
@@ -351,10 +362,10 @@
     "volume": "30(35)",
     "pages": "2003192",
     "doi": "10.1002/adfm.202003192",
-    "highlight": true
+    "highlight": false
   },
   {
-    "id": "pub2020e",
+    "id": "pub2020b",
     "year": 2020,
     "title": "Effects of Interlayer Coupling and Band Offset on Second Harmonic Generation in Vertical MoS₂-MoS₂(1-x)Se₂x Structures",
     "authors": "Chinh Tam Le†, J. Kim†, Farman Ullah, Anh Duc Nguyen, Thao Nhi Nguyen Tran, T.-E. Le, K.-H. Chung, H. Cheong, J. I. Jang*, Yong Soo Kim*",
@@ -376,7 +387,7 @@
     "highlight": false
   },
   {
-    "id": "pub2019d",
+    "id": "pub2019a",
     "year": 2019,
     "title": "Nitrogen-Plasma-Treated Continuous Monolayer MoS₂ for Improving Hydrogen Evolution Reaction",
     "authors": "Anh Duc Nguyen†, Tri Khoa Nguyen†, Chinh Tam Le, Y. Lee, S. Lee, K. Kim, T.-S. Ju, S. Park, J.-S. Bae, J. I. Jang*, Yong Soo Kim*",
@@ -387,7 +398,7 @@
     "highlight": false
   },
   {
-    "id": "pub2018j",
+    "id": "pub2018c",
     "year": 2018,
     "title": "High Photoresponse in Conformally Grown Monolayer MoS₂ on a Rugged Substrate",
     "authors": "Tri Khoa Nguyen, Anh Duc Nguyen, Chinh Tam Le, Farman Ullah, Zeeshan Tahir, Kyo-in Koo, Eunha Kim, Dong-Wook Kim*, Joon I. Jang*, Yong Soo Kim*",
@@ -398,7 +409,7 @@
     "highlight": false
   },
   {
-    "id": "pub2018h",
+    "id": "pub2018b",
     "year": 2018,
     "title": "MoS₂ Monolayers on Si and SiO₂ Nanocone Arrays: Influences of 3D Dielectric Materials Refractive Indices on 2D MoS₂ Optical Absorption",
     "authors": "E. Kim, J.-W. Cho, Tri Khoa Nguyen, T. T. Thu Nguyen, S. Yoon, J.-H. Choi, Y. C. Park, S.-K. Kim*, Yong Soo Kim*, Dong-Wook Kim*",
@@ -420,7 +431,7 @@
     "highlight": false
   },
   {
-    "id": "pub2017k",
+    "id": "pub2017c",
     "year": 2017,
     "title": "Growth and Simultaneous Valleys Manipulation of Two-Dimensional MoSe₂-WSe₂ Lateral Heterostructure",
     "authors": "Farman Ullah, Yumin Sim, Chinh Tam Le, Maeng-Je Seong, Joon I. Jang*, Sonny H. Rhim, Bien Cuong Tran Khac, K.-H. Chung, K. Park, Y. Lee, K. Kim, H. Y. Jeong, Yong Soo Kim*",
@@ -431,18 +442,18 @@
     "highlight": false
   },
   {
-    "id": "pub2017m",
+    "id": "pub2017b",
     "year": 2017,
     "title": "Multiphoton Absorption Order of CsPbBr₃ as Determined by Wavelength-Dependent Nonlinear Optical Spectroscopy",
     "authors": "Felix O. Saouma, Constantinos C. Stoumpos, Mercouri G. Kanatzidis, Yong Soo Kim*, Joon I. Jang*",
     "journal": "Journal of Physical Chemistry Letters",
     "volume": "8(19)",
     "pages": "4912–4917",
-    "doi": "",
+    "doi": "10.1021/acs.jpclett.7b02286",
     "highlight": false
   },
   {
-    "id": "pub2017b",
+    "id": "pub2017a",
     "year": 2017,
     "title": "Impact of Selenium Doping on Resonant Second Harmonic Generation in Monolayer MoS₂",
     "authors": "Chinh Tam Le, Daniel J. Clark, Farman Ullah, V. Senthilkumar, Sonny H. Rhim, Joon I. Jang*, Y. Sim, M.-J. Seong, H. C. Koo, Yong Soo Kim*",
@@ -453,37 +464,37 @@
     "highlight": false
   },
   {
-    "id": "pub2015d",
+    "id": "pub2015c",
     "year": 2015,
     "title": "Hybrid Germanium Iodide Perovskite Semiconductors: Active Lone Pairs, Structural Distortions, Direct and Indirect Energy Gaps and Strong Nonlinear Optical Properties",
     "authors": "Constantinos C. Stoumpos, N. Laszlo Fraser, Daniel J. Clark, Yong S. Kim, Sonny Rhim, Arthur J. Freeman, John B. Ketterson, Joon I. Jang, Mercouri G. Kanatzidis*",
     "journal": "Journal of the American Chemical Society",
     "volume": "137(21)",
     "pages": "6804–6819",
-    "doi": "",
+    "doi": "10.1021/jacs.5b01025",
     "highlight": false
   },
   {
-    "id": "pub2016g",
+    "id": "pub2016b",
     "year": 2016,
     "title": "Nonlinear Optical Characteristics of Monolayer MoSe₂",
-    "authors": "Chinh Tam Le, Daniel J. Clark, Farman Ullah, Velusamy Senthilkumar, Joon I. Jang*, Yumin Sim, Maeng-Je Seong, Koo-Hyun Chung, Hyoyeol Park, Yong Soo Kim*",
+    "authors": "Chinh Tam Le, Daniel J. Clark, Farman Ullah, Velusamy Senthilkumar, Joon I. Jang*, Y. Sim, M.-J. Seong, K.-H. Chung, H. Park, Yong Soo Kim*",
     "journal": "Annalen der Physik",
     "volume": "528(7-8)",
     "pages": "551–559",
-    "doi": "",
+    "doi": "10.1002/andp.201600006",
     "highlight": true,
     "cover_image": "assets/images/covers/cover_annalen_physik_2016.jpg.jpg"
   },
   {
-    "id": "pub2014j",
+    "id": "pub2014a",
     "year": 2014,
     "title": "Strong Optical Nonlinearity of MoS₂ Monolayer as Probed by Wavelength-Dependent Second Harmonic Generation",
     "authors": "Daniel J. Clark, V. Senthilkumar, C. T. Le, D. L. Weerawarne, B. Shim, Jang J. Jang*, J. H. Shim, J. Cho, Y. Sim, M.-J. Seong, S. H. Rhim, A. J. Freeman, K.-H. Chung, Yong Soo Kim*",
     "journal": "Physical Review B",
     "volume": "90(12)",
     "pages": "121409(R)",
-    "doi": "",
+    "doi": "10.1103/PhysRevB.90.121409",
     "highlight": false
   }
 ]
