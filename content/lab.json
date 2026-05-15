@@ -1,24 +1,23 @@
 {
-  "name": "Semiconductor Device Research Lab",
+  "name": "Semiconductor Device Research Lab(SDRL)",
   "name_kr": "반도체 소자 연구실",
   "acronym": "SRDL",
   "university": "University of Ulsan",
-  "department": "Department of Electrical Engineering",
+  "department": "Department of Semiconductor Engineering",
   "pi": {
-    "name": "Prof. [교수님 성함]",
+    "name": "Prof. [Yong Soo Kim]",
     "title": "Professor",
-    "email": "pi@university.ac.kr",
-    "office": "Building X, Room XXX",
-    "phone": "+82-52-XXX-XXXX"
+    "email": "yskim2@ulsan.ac.kr",
+    "office": "Building 8, Room 331",
+    "phone": "+82-052-529-2326"
   },
   "address": "93 Daehak-ro, Nam-gu, Ulsan 44610, Republic of Korea",
-  "description": "Our research focuses on 2D semiconductor and perovskite materials for advanced optoelectronic device applications, including photodetectors, LEDs, and solar cells.",
+  "description": "Our research focuses on 2D semiconductor and perovskite materials for advanced optoelectronic device applications, including nuromorphic memory device, photodetectors, and solar cells.",
   "keywords": [
-    "2D Semiconductors",
+    "2D Semiconductors; TMDCs",
     "Perovskite",
     "Optoelectronics",
-    "MoS₂",
-    "WSe₂",
+    "Nuromorphic memory",
     "Photodetectors"
   ]
 }
