@@ -8,7 +8,8 @@
     "volume": "13(21)",
     "pages": "e20423",
     "doi": "10.1002/advs.202520413",
-    "highlight": true
+    "highlight": true,
+    "cover_image": "assets/images/covers/Cover_advanced_science_2026.jpg"
   },
   {
     "id": "pub2026a",
@@ -250,7 +251,8 @@
     "volume": "13(43)",
     "pages": "50911–50919",
     "doi": "10.1021/acsami.1c14247",
-    "highlight": false
+    "highlight": true,
+    "cover_image": "assets/images/covers/cover_ace_ami_2021.jpg"
   },
   {
     "id": "pub2021h",
@@ -460,6 +462,18 @@
     "pages": "6804–6819",
     "doi": "",
     "highlight": false
+  },
+  {
+    "id": "pub2016g",
+    "year": 2016,
+    "title": "Nonlinear Optical Characteristics of Monolayer MoSe₂",
+    "authors": "Chinh Tam Le, Daniel J. Clark, Farman Ullah, Velusamy Senthilkumar, Joon I. Jang*, Yumin Sim, Maeng-Je Seong, Koo-Hyun Chung, Hyoyeol Park, Yong Soo Kim*",
+    "journal": "Annalen der Physik",
+    "volume": "528(7-8)",
+    "pages": "551–559",
+    "doi": "",
+    "highlight": true,
+    "cover_image": "assets/images/covers/cover_annalen_physik_2016.jpg.jpg"
   },
   {
     "id": "pub2014j",
