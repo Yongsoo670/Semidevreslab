@@ -4,7 +4,7 @@
   "acronym": "SRDL",
   "university": "University of Ulsan",
   "department": "Department of Semiconductor Engineering",
-  "pi": {
+  "PI": {
     "name": "Prof. [Yong Soo Kim]",
     "title": "Professor",
     "email": "yskim2@ulsan.ac.kr",
@@ -12,12 +12,12 @@
     "phone": "+82-052-529-2326"
   },
   "address": "93 Daehak-ro, Nam-gu, Ulsan 44610, Republic of Korea",
-  "description": "Our research focuses on 2D semiconductor and perovskite materials for advanced optoelectronic device applications, including nuromorphic memory device, photodetectors, and solar cells.",
+  "description": "Our research focuses on 2D semiconductor and perovskite materials for advanced optoelectronic device applications,including memory device, solar cells and solar steam generation.",
   "keywords": [
     "2D Semiconductors; TMDCs",
     "Perovskite",
     "Optoelectronics",
-    "Nuromorphic memory",
-    "Photodetectors"
+    "Nurmomorphic computing",
+    "Solar steam generation"
   ]
 }
